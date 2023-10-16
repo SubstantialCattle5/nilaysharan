@@ -5,12 +5,17 @@ import { IoArrowDownOutline, IoNewspaperSharp } from 'react-icons/io5';
 import { SiGithub, SiInstagram } from 'react-icons/si';
 import Typewriter from 'typewriter-effect';
 
+import useInjectContentMeta from '@/hooks/useInjectContentMeta';
 import useLoaded from '@/hooks/useLoaded';
 
 import Accent from '@/components/Accent';
+import BlogCard from '@/components/content/blogs/BlogCard';
+import ProjectCard from '@/components/content/projects/ProjectCard';
 import ButtonLink from '@/components/links/ButtonLink';
 import CustomLink from '@/components/links/CustomLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
+
+import { BlogFrontmatter, ProjectFrontmatter } from '@/types/frontmatters';
 
 /**
  * SVGR Support
@@ -24,10 +29,11 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 
 export default function HomePage() {
   const isLoaded = useLoaded();
-
+  const populatedProjects =
+    useInjectContentMeta('projects', 'featuredProjects') || [];
+  const populatedPosts = useInjectContentMeta('blog', 'featuredBlogs') || [];
   return (
     <main>
-      {' '}
       <section
         className={clsx(
           'min-h-main -mt-20 mb-20 flex flex-col justify-center',
@@ -62,8 +68,9 @@ export default function HomePage() {
             )}
             data-fade='3'
           >
-            I work with react ecosystem to solve real-world problems and create
-            value. I build products with robust functionality and secure code.
+            I'm a programmer based in India. I try to solve real-world problems
+            and create value. I build products with robust functionality and
+            secure code.
           </p>
           <p
             className='mt-3 max-w-4xl leading-relaxed text-gray-700 dark:text-gray-200 md:mt-4 md:text-lg 2xl:text-xl'
@@ -73,7 +80,7 @@ export default function HomePage() {
             <CustomLink href='/guestbook'>guestbook</CustomLink>!
           </p>
           <div data-fade='5' className='mt-8 flex flex-wrap gap-4 md:!text-lg'>
-            <ButtonLink href='/about'>Learn more about me</ButtonLink>
+            <ButtonLink href='/about'>About me!</ButtonLink>
           </div>
           <div
             data-fade='6'
@@ -127,6 +134,55 @@ export default function HomePage() {
         >
           <IoArrowDownOutline className='h-8 w-8 animate-bounce md:h-10 md:w-10' />
         </UnstyledLink>
+      </section>
+      {/* Projects */}
+      <section className={clsx('fade-in-start py-20')}>
+        <article className='layout' data-fade='0'>
+          <h2 className='text-2xl md:text-4xl' id='projects'>
+            <Accent>Curated Projects</Accent>
+          </h2>
+          <p className='mt-2 text-gray-600 dark:text-gray-300'>
+            Below are some of my favorite projects over the years, a few of
+            which have been featured in hackathons Yantra, Social Transformers,
+            Devsoc and more.
+          </p>
+          <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+            {populatedProjects.map((project, i) => (
+              <ProjectCard
+                key={project.slug}
+                project={project as ProjectFrontmatter}
+                className={clsx(i > 2 && 'hidden sm:block')}
+              />
+            ))}
+          </ul>
+          <ButtonLink className='mt-4' href='/projects'>
+            See more project
+          </ButtonLink>
+        </article>
+      </section>
+      {/* Blogs */}
+      <section className={clsx('fade-in-start py-20')}>
+        <article className='layout' data-fade='0'>
+          <h2 className='text-2xl md:text-4xl' id='blog'>
+            <Accent>Blogs Archive</Accent>
+          </h2>
+          <p className='mt-2 text-gray-600 dark:text-gray-300'>
+            When I'm not working on projects, I enjoy travelling , taking
+            pictures and writing blogs. Here are a few selects.
+          </p>
+          <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+            {populatedPosts.map((post, i) => (
+              <BlogCard
+                key={post.slug}
+                post={post as BlogFrontmatter}
+                className={clsx(i > 2 && 'hidden sm:block')}
+              />
+            ))}
+          </ul>
+          <ButtonLink className='mt-4' href='/blog'>
+            See more Blogs
+          </ButtonLink>
+        </article>
       </section>
     </main>
   );
