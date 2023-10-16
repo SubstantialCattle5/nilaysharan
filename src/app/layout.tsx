@@ -10,7 +10,6 @@ import Header from '@/components/layout/Header';
 import { ThemeProvider } from '@/components/theme-provider';
 
 import { siteConfig } from '@/constant/config';
-import { PreloadProvider } from '@/context/PreloadContext';
 
 export const metadata: Metadata = {
   title: {
@@ -43,9 +42,10 @@ export default function RootLayout({
     <html className='antialiased'>
       <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false}>
         <Header />
-        <PreloadProvider>
+        {/* <PreloadProvider>
           <div id='skip-nav'>{children}</div>
-        </PreloadProvider>
+        </PreloadProvider> */}
+        {children}
         <Footer />
       </ThemeProvider>
     </html>
