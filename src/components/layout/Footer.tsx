@@ -86,21 +86,6 @@ const footerLinks: { href: string; text: string; tooltip: React.ReactNode }[] =
       tooltip: 'Personal documentation about my best practices on development',
     },
     {
-      href: '/',
-      text: 'Book Notes',
-      tooltip: 'Note collection of books that I read',
-    },
-    {
-      href: 'github.com/substantialcattle5',
-      text: 'Starter Templates',
-      tooltip: 'Starter that I build and use throughout my projects',
-    },
-    {
-      href: '/statistics',
-      text: 'Statistics',
-      tooltip: 'Blog, Projects, and Library Statistics',
-    },
-    {
       href: '/guestbook',
       text: 'Guestbook',
       tooltip:
