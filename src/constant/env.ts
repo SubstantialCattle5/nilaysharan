@@ -2,6 +2,7 @@ import { getFromLocalStorage } from '@/lib/helper.client';
 
 export const isProd = process.env.NODE_ENV === 'production';
 
+export const showLogger = !isProd;
 /**
  * Show command service on contents
  * @see Comment.tsx
