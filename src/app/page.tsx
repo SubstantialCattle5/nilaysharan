@@ -1,5 +1,16 @@
-import Head from 'next/head';
+'use client';
+import clsx from 'clsx';
 import * as React from 'react';
+import { IoArrowDownOutline, IoNewspaperSharp } from 'react-icons/io5';
+import { SiGithub, SiInstagram } from 'react-icons/si';
+import Typewriter from 'typewriter-effect';
+
+import useLoaded from '@/hooks/useLoaded';
+
+import Accent from '@/components/Accent';
+import ButtonLink from '@/components/links/ButtonLink';
+import CustomLink from '@/components/links/CustomLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
 
 /**
  * SVGR Support
@@ -12,15 +23,110 @@ import * as React from 'react';
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 
 export default function HomePage() {
+  const isLoaded = useLoaded();
+
   return (
     <main>
-      <Head>
-        <title>Hi</title>
-      </Head>
-      <section className=''>
-        <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
-          <h1 className='text-3xl font-bold'>Hi</h1>
-        </div>
+      {' '}
+      <section
+        className={clsx(
+          'min-h-main -mt-20 mb-20 flex flex-col justify-center',
+          isLoaded && 'fade-in-start'
+        )}
+      >
+        <article className='layout'>
+          <h2 className='text-2xl md:text-4xl 2xl:text-5xl' data-fade='1'>
+            <Typewriter
+              options={{
+                strings: [
+                  'Hello!',
+                  'नमस्ते!',
+                  'ہیلو!',
+                  'ನಮಸ್ಕಾರ!',
+                  'Привет!',
+                  'Olá!',
+                  'שָׁלוֹם!',
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </h2>
+          <h1 className='mt-1 text-3xl md:text-5xl 2xl:text-6xl' data-fade='2'>
+            You can call me <Accent>Nilay</Accent>
+          </h1>
+          <p
+            className={clsx(
+              'mt-4 max-w-4xl text-gray-700 dark:text-gray-200 md:mt-6',
+              'md:text-lg 2xl:text-xl'
+            )}
+            data-fade='3'
+          >
+            I work with react ecosystem to solve real-world problems and create
+            value. I build products with robust functionality and secure code.
+          </p>
+          <p
+            className='mt-3 max-w-4xl leading-relaxed text-gray-700 dark:text-gray-200 md:mt-4 md:text-lg 2xl:text-xl'
+            data-fade='4'
+          >
+            Don't forget to sign my{' '}
+            <CustomLink href='/guestbook'>guestbook</CustomLink>!
+          </p>
+          <div data-fade='5' className='mt-8 flex flex-wrap gap-4 md:!text-lg'>
+            <ButtonLink href='/about'>Learn more about me</ButtonLink>
+          </div>
+          <div
+            data-fade='6'
+            className='mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8'
+          >
+            <UnstyledLink
+              href='https://drive.google.com/file/d/1dEdLkBvFTEj_hobo4R8n6jgQcIzICi1j/view'
+              className={clsx(
+                'inline-flex items-center gap-1 text-sm font-medium md:text-base',
+                'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
+                'focus-visible:ring-primary-300 focus:outline-none focus-visible:ring',
+                'transition-colors'
+              )}
+            >
+              <IoNewspaperSharp className='shrink-0' />
+              <span>Resume</span>
+            </UnstyledLink>
+            <UnstyledLink
+              href='https://www.instagram.com/nilay.sharan/'
+              className={clsx(
+                'inline-flex items-center gap-1 text-sm font-medium md:text-base',
+                'group text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
+                'focus-visible:ring-primary-300 focus:outline-none focus-visible:ring',
+                'transition-colors'
+              )}
+            >
+              <SiInstagram className='group-hover:text-red shrink-0 transition-colors' />
+              <span>nilay.sharan</span>
+            </UnstyledLink>
+            <UnstyledLink
+              href='https://github.com/substantialcattle5'
+              className={clsx(
+                'inline-flex items-center gap-1 text-sm font-medium md:text-base',
+                'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
+                'focus-visible:ring-primary-300 focus:outline-none focus-visible:ring',
+                'transition-colors'
+              )}
+            >
+              <SiGithub className='shrink-0' />
+              <span>SubstantialCattle5</span>
+            </UnstyledLink>
+          </div>
+        </article>
+        <UnstyledLink
+          href='#intro'
+          className={clsx(
+            'absolute bottom-2 left-1/2 -translate-x-1/2 md:bottom-10',
+            'cursor-pointer rounded-md transition-colors',
+            'hover:text-primary-300 focus-visible:text-primary-300'
+          )}
+        >
+          <IoArrowDownOutline className='h-8 w-8 animate-bounce md:h-10 md:w-10' />
+        </UnstyledLink>
       </section>
     </main>
   );
