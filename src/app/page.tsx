@@ -143,8 +143,8 @@ export default function HomePage() {
           </h2>
           <p className='mt-2 text-gray-600 dark:text-gray-300'>
             Below are some of my favorite projects over the years, a few of
-            which have been featured in hackathons Yantra, Social Transformers,
-            Devsoc and more.
+            which have been featured in Yantra, Social Transformers, Devsoc and
+            more.
           </p>
           <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
             {populatedProjects.map((project, i) => (
@@ -167,8 +167,8 @@ export default function HomePage() {
             <Accent>Blogs Archive</Accent>
           </h2>
           <p className='mt-2 text-gray-600 dark:text-gray-300'>
-            When I'm not working on projects, I enjoy travelling , taking
-            pictures and writing blogs. Here are a few selects.
+            When I'm not working on projects, I enjoy travelling, taking
+            pictures and writing blogs. Here are a few select.
           </p>
           <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
             {populatedPosts.map((post, i) => (
