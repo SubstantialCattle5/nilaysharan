@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
+import CloudinaryImg from '@/components/images/CloudinaryImg';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import TechIcons, { TechListType } from '@/components/TechIcons';
 
@@ -35,14 +36,14 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
           <TechIcons techs={project.techs.split(',') as Array<TechListType>} />
         </div>
 
-        {/* <CloudinaryImg
+        <CloudinaryImg
           className='pointer-events-none mt-3 w-full'
-          publicId={`theodorusclarence/${project.banner}`}
+          publicId={`${project.banner}`}
           alt={project.title}
           width={1440}
           height={792}
           preview={false}
-        /> */}
+        />
 
         <p className='animated-underline mt-2 inline-block font-medium'>
           See more →

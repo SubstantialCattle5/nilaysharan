@@ -12,6 +12,9 @@ export default function useInjectContentMeta<T extends ContentType>(
   if (type === 'projects' && frontmatter === 'featuredProjects') {
     return featuredProjects;
   }
+  if (type === 'projects' && frontmatter === 'allProjects') {
+    return allProjects;
+  }
 
   if (type === 'blog' && frontmatter === 'featuredBlogs') {
     return featuredBlogs;
@@ -26,7 +29,7 @@ const featuredProjects: Array<ProjectFrontmatter> = [
     description:
       'Portal that tracks down a person of interest by using backtracking and video footage from CCTV cameras.',
     techs: 'react,tailwindcss,typescript',
-    banner: 'banner',
+    banner: 'nilaysharan/project/humantd/qwlr8aaqfn7xwb1dazqr',
   },
   {
     slug: 'medbud',
@@ -34,8 +37,8 @@ const featuredProjects: Array<ProjectFrontmatter> = [
     publishedAt: '2021-01-01',
     description:
       'Service that offers text-based management for hospitals and their patients features a chatbot',
-    techs: 'react,typescript,tailwindcss',
-    banner: 'banner',
+    techs: 'express,typescript,flutter',
+    banner: 'nilaysharan/project/medbud/banner',
   },
   {
     slug: 'echoes',
@@ -43,11 +46,40 @@ const featuredProjects: Array<ProjectFrontmatter> = [
     publishedAt: '2021-01-01',
     description:
       'Terminal based interface that assists users to select templates for codes and React components.',
-    techs: 'react,typescript,tailwindcss',
-    banner: 'banner',
+    techs: 'git,typescript',
+    banner: 'nilaysharan/project/echoes/banner',
   },
 ];
 
+const allProjects: Array<ProjectFrontmatter> = [
+  {
+    slug: 'humantd',
+    title: 'HumanTD',
+    publishedAt: '2021-01-01',
+    description:
+      'Portal that tracks down a person of interest by using backtracking and video footage from CCTV cameras.',
+    techs: 'react,tailwindcss,typescript',
+    banner: 'nilaysharan/project/humantd/qwlr8aaqfn7xwb1dazqr',
+  },
+  {
+    slug: 'medbud',
+    title: 'MedBud',
+    publishedAt: '2021-01-01',
+    description:
+      'Service that offers text-based management for hospitals and their patients features a chatbot',
+    techs: 'express,typescript,flutter',
+    banner: 'nilaysharan/project/medbud/banner',
+  },
+  {
+    slug: 'echoes',
+    title: 'Echoes',
+    publishedAt: '2021-01-01',
+    description:
+      'Terminal based interface that assists users to select templates for codes and React components.',
+    techs: 'git,typescript',
+    banner: 'nilaysharan/project/echoes/banner',
+  },
+];
 const featuredBlogs: Array<BlogFrontmatter> = [
   {
     wordCount: 507,
