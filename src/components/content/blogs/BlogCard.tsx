@@ -4,6 +4,8 @@ import * as React from 'react';
 import { HiOutlineClock } from 'react-icons/hi';
 
 import Accent from '@/components/Accent';
+import Tag from '@/components/content/Tag';
+import CloudinaryImg from '@/components/images/CloudinaryImg';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
 import { BlogFrontmatter } from '@/types/frontmatters';
@@ -13,7 +15,12 @@ type BlogCardProps = {
   checkTagged?: (tag: string) => boolean;
 } & React.ComponentPropsWithoutRef<'li'>;
 
-export default function BlogCard({ post, className, onClick }: BlogCardProps) {
+export default function BlogCard({
+  post,
+  className,
+  onClick,
+  checkTagged,
+}: BlogCardProps) {
   return (
     <li
       className={clsx(
@@ -31,16 +38,32 @@ export default function BlogCard({ post, className, onClick }: BlogCardProps) {
         href={`/blog/${post.slug}`}
       >
         <div className='relative'>
-          {/* <CloudinaryImg
+          <CloudinaryImg
             noStyle
             className='pointer-events-none overflow-hidden rounded-t-md'
-            publicId={`theodorusclarence/banner/${post.banner}`}
+            publicId={post.banner}
             alt='Photo taken from unsplash'
             width={1200}
             height={(1200 * 2) / 5}
             aspect={{ height: 2, width: 5 }}
             preview={false}
-          /> */}
+          />
+          <div
+            className={clsx(
+              'absolute bottom-0 w-full px-4 py-2',
+              'mt-2 flex flex-wrap justify-end gap-x-2 gap-y-1 text-sm text-black dark:text-gray-100'
+            )}
+          >
+            {post.tags.split(',').map((tag) => (
+              <Tag
+                tabIndex={-1}
+                className='bg-opacity-80 dark:!bg-opacity-60'
+                key={tag}
+              >
+                {checkTagged?.(tag) ? <Accent>{tag}</Accent> : tag}
+              </Tag>
+            ))}
+          </div>
         </div>
         <div className='p-4'>
           <h4 className='text-gray-800 dark:text-gray-100'>{post.title}</h4>

@@ -46,7 +46,7 @@ const Page = () => {
                 alt='Photo of me'
                 preview={false}
               />
-              <article className='prose dark:prose-invert'>
+              <article className=''>
                 <p data-fade='3'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Vestibulum auctor ex vel nibh tempus, id suscipit mauris
@@ -63,18 +63,19 @@ const Page = () => {
                   ces posuere cubilia Curae; Curabitur semper finibus justo, id
                   dictum tellus commodo vitae. Suspendisse potenti. Quisque et
                   sodales lectus. Suspendisse euismod leo eu tincidunt luctus.
-                  Fusce dictum, odio vel ullamcorper cursus,
+                  Fusce dictum, odio vel ullamcorper cursus, elit odio fermentum
+                  ex, nec interdum orci felis et ligula.
                 </p>
                 <br />
                 <p data-fade='5'>
-                  elit odio fermentum ex, nec interdum orci felis et ligula. Sed
-                  volutpat massa nec tortor bibendum, non interdum purus
-                  malesuada. Fusce eu risus vitae dolor iaculis malesuada.
-                  Quisque id commodo purus. Nam vel ligula auctor, bibendum
-                  ligula in, consectetur dolor.
+                  ces posuere cubilia Curae; Curabitur semper finibus justo, id
+                  dictum tellus commodo vitae. Suspendisse potenti. Quisque et
+                  sodales lectus. Suspendisse euismod leo eu tincidunt luctus.
+                  Fusce dictum, odio vel ullamcorper cursus, elit odio fermentum
+                  ex, nec interdum orci felis et ligula.
                 </p>
               </article>
-              <h3 className='mt-6'>Current Favourite Stack:</h3>
+              <h3 className='mt-12'>Current Favourite Stack:</h3>
               <figure className='mt-2'>
                 <TechStack />
               </figure>

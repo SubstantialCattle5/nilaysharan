@@ -50,36 +50,36 @@ const featuredProjects: Array<ProjectFrontmatter> = [
 
 const featuredBlogs: Array<BlogFrontmatter> = [
   {
-    wordCount: 123,
-    readingTime: 123,
-    slug: 'sober-to-death',
-    title: 'Sober to Death',
+    wordCount: 507,
+    readingTime: 2.5,
+    slug: 'service-animal',
+    title: 'Service Animal : An Emotional Musical Journey',
     description:
-      'Not Conforming to the Norms of Society and the Consequences of it but still being very afraid of the monkeys out for blood.',
-    banner: 'banner',
+      'Service Animal" by Jamblu: A soul-stirring musical odyssey exploring self-love and human connections, embracing emotions from heartache to hope.',
+    banner: 'nilaysharan/blog/service_animal/banner',
     publishedAt: '2021-01-01',
-    tags: 'world trade',
+    tags: 'review,album',
+  },
+  {
+    wordCount: 1399,
+    readingTime: 7,
+    slug: 'pather-panchali-the-enduring-impact-on-modern-indian-cinema',
+    title: 'Pather Panchali : The Enduring Impact on Modern Indian Cinema',
+    description:
+      'Pather Panchali: Masterpiece revolutionizing Indian cinema, shaping narratives, and inspiring filmmakers worldwide.',
+    banner: 'nilaysharan/blog/pather_panchali/banner',
+    publishedAt: '2021-01-01',
+    tags: 'deep dive,movie',
   },
   {
     wordCount: 123,
-    readingTime: 345,
-    slug: 'fill-in-the-blanks',
-    title: 'Fill in the Blanks',
-    description:
-      'The age old system of filling in the blanks to get the answers right.',
-    banner: 'banner',
-    publishedAt: '2021-01-01',
-    tags: 'world trade',
-  },
-  {
-    wordCount: 123,
-    readingTime: 12345,
+    readingTime: 8,
     slug: 'drunk-drivers-against-mothers',
-    title: 'Drunk Drivers Against Mothers',
+    title: 'Deep Dive on The Madcap Laughs by Syd Barrett',
     description:
-      'The rise of old mothers falling for drunk drivers and the consequences of it.',
-    banner: 'banner',
+      'The Madcap Laughs: A psychedelic journey into the mind of Syd Barrett, the founding member of Pink Floyd.',
+    banner: 'nilaysharan/blog/syd/banner',
     publishedAt: '2021-01-01',
-    tags: 'world trade',
+    tags: 'album,deep dive',
   },
 ];
