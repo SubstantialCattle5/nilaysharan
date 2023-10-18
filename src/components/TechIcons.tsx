@@ -2,7 +2,9 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { IoLogoVercel } from 'react-icons/io5';
 import {
+  SiExpress,
   SiFirebase,
+  SiFlutter,
   SiGit,
   SiGoogleanalytics,
   SiJavascript,
@@ -115,5 +117,13 @@ const techList = {
   swift: {
     icon: SiSwift,
     name: 'Swift',
+  },
+  express: {
+    icon: SiExpress,
+    name: 'Express',
+  },
+  flutter: {
+    icon: SiFlutter,
+    name: 'Flutter',
   },
 };

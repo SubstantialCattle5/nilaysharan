@@ -7,6 +7,7 @@ import {
   Frontmatter,
   FrontmatterWithDate,
   FrontmatterWithTags,
+  ProjectFrontmatter,
 } from '@/types/frontmatters';
 
 export function sortDateFn<T extends FrontmatterWithDate>(
@@ -42,5 +43,18 @@ export function getTags<T extends Array<FrontmatterWithTags>>(contents: T) {
     []
   );
 
+  return map(sortBy(toPairs(countBy(tags)), 1), 0).reverse();
+}
+
+/**
+ * Get tags for each projects and remove duplicates
+ */
+export function getTagsForProjects<T extends Array<ProjectFrontmatter>>(
+  contents: T
+) {
+  const tags = contents.reduce(
+    (accTags: string[], content) => [...accTags, ...content.techs.split(',')],
+    []
+  );
   return map(sortBy(toPairs(countBy(tags)), 1), 0).reverse();
 }
