@@ -43,11 +43,11 @@ export async function getFileBySlug(
 ): Promise<{ code: string; frontmatter: Frontmatter }> {
   const source = slug
     ? readFileSync(
-        join(process.cwd(), 'src', 'contents', type, `${slug}.mdx`),
+        join(process.cwd(), 'public', 'contents', type, `${slug}.mdx`),
         'utf8'
       )
     : readFileSync(
-        join(process.cwd(), 'src', 'contents', `${type}.mdx`),
+        join(process.cwd(), 'public', 'contents', `${type}.mdx`),
         'utf8'
       );
 
