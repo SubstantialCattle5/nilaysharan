@@ -191,7 +191,7 @@ export function prefetchRoutes({ type }: { type: ContentType }): {
     return {
       slug: slug,
       source: readFileSync(
-        join(process.cwd(), 'contents', type, `${slug}.mdx`),
+        join(process.cwd(), 'public', 'contents', type, `${slug}.mdx`),
         'utf8'
       ),
     };
