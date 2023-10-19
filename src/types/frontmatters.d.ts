@@ -2,7 +2,7 @@ import { ReadTimeResults } from 'reading-time';
 
 export type BlogFrontmatter = {
   wordCount: number;
-  readingTime: number;
+  readingTime: ReadingTimeResults;
   slug: string;
   englishOnly?: boolean;
   title: string;
@@ -63,7 +63,4 @@ export type ProjectType = {
 
 export type FrontmatterWithTags = BlogFrontmatter | LibraryFrontmatter;
 export type FrontmatterWithDate = BlogFrontmatter | ProjectFrontmatter;
-export type Frontmatter =
-  | ProjectFrontmatter
-  | BlogFrontmatter
-  | LibraryFrontmatter;
+export type Frontmatter = ProjectFrontmatter | BlogFrontmatter;
