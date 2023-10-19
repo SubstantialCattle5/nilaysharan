@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getFileBySlug } from '@/lib/mdx.server';
 
 export async function GET(req: NextRequest) {
-  const BASE_URL = `http://localhost:3000`;
+  const BASE_URL = `https://nilaysharan.vercel.app`;
   const url = new URL(req.url || '', BASE_URL);
 
   const slug = url.pathname.split('/').pop() || '';
