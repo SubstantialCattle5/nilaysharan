@@ -1,6 +1,6 @@
+import { readFileSync } from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
-
-import { getFileBySlug } from '@/lib/mdx.server';
+import { join } from 'path';
 
 export async function GET(req: NextRequest) {
   const BASE_URL = `${req.nextUrl.origin}/api/blog/`;
@@ -11,7 +11,10 @@ export async function GET(req: NextRequest) {
   if (!slug) return new NextResponse(null, { status: 404 });
 
   try {
-    const file = await getFileBySlug('blog', slug);
+    const file = readFileSync(
+      join(process.cwd(), 'contents', 'blog', `${slug}.mdx`),
+      'utf8'
+    );
 
     if (!file)
       return new NextResponse(null, { status: 404, statusText: 'Not found ' });
