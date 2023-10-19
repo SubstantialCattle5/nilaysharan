@@ -16,7 +16,7 @@ import { BlogFrontmatter } from '@/types/frontmatters';
 
 const Page = () => {
   const isLoaded = useLoaded();
-  const popluatedPosts = useInjectContentMeta('blog', 'featuredBlogs');
+  const popluatedPosts = useInjectContentMeta('blog', 'allBlogs');
 
   //#region //* Search
   const posts = sortByDate(popluatedPosts as BlogFrontmatter[]);

@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import { FaHardHat } from 'react-icons/fa';
 import { IoLogoVercel } from 'react-icons/io5';
 import {
+  SiEthereum,
   SiExpress,
   SiFirebase,
   SiFlutter,
@@ -10,10 +12,13 @@ import {
   SiJavascript,
   SiMarkdown,
   SiMongodb,
+  SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
   SiNotion,
+  SiPostgresql,
   SiPrettier,
+  SiPrisma,
   SiReact,
   SiRedux,
   SiSass,
@@ -21,7 +26,6 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from 'react-icons/si';
-
 export type TechListType = keyof typeof techList;
 
 export type TechIconsProps = {
@@ -125,5 +129,25 @@ const techList = {
   flutter: {
     icon: SiFlutter,
     name: 'Flutter',
+  },
+  blockchain: {
+    icon: SiEthereum,
+    name: 'Blockchain',
+  },
+  hardhat: {
+    icon: FaHardHat,
+    name: 'Hardhat',
+  },
+  nestjs: {
+    icon: SiNestjs,
+    name: 'NestJS',
+  },
+  prisma: {
+    icon: SiPrisma,
+    name: 'Prisma',
+  },
+  postgresql: {
+    icon: SiPostgresql,
+    name: 'PostgreSQL',
   },
 };
