@@ -37,10 +37,19 @@ export async function getFileSlugArray(type: ContentType) {
  * @param {string} slug - The slug of the file.
  * @returns {Promise<{code: string, frontmatter: Frontmatter}>} - A promise that resolves to an object containing the code and frontmatter of the file.
  */
-export async function getFileBySlug(type: ContentType, slug: string) {
+export async function getFileBySlug(
+  type: ContentType,
+  slug: string
+): Promise<{ code: string; frontmatter: Frontmatter }> {
   const source = slug
-    ? await import(`../contents/${type}/${slug}.mdx`)
-    : await import(`../contents/${type}.mdx`);
+    ? readFileSync(
+        join(process.cwd(), 'src', 'contents', type, `${slug}.mdx`),
+        'utf8'
+      )
+    : readFileSync(
+        join(process.cwd(), 'src', 'contents', `${type}.mdx`),
+        'utf8'
+      );
 
   const { code, frontmatter } = await bundleMDX({
     source,
