@@ -1,6 +1,6 @@
-import { readFileSync } from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
-import { join } from 'path';
+
+import { getFileBySlug, prefetchRoutes } from '@/lib/mdx.server';
 
 export async function GET(req: NextRequest) {
   const BASE_URL = `${req.nextUrl.origin}/api/blog/`;
@@ -11,10 +11,9 @@ export async function GET(req: NextRequest) {
   if (!slug) return new NextResponse(null, { status: 404 });
 
   try {
-    const file = readFileSync(
-      join(process.cwd(), 'public', 'contents', 'blog', `service-animal.mdx`),
-      'utf8'
-    );
+    const preRoutes = prefetchRoutes({ type: 'blog' });
+    const source = preRoutes.filter((route) => route.slug === slug)[0].source;
+    const file = await getFileBySlug(source, slug);
 
     if (!file)
       return new NextResponse(null, { status: 404, statusText: 'Not found ' });

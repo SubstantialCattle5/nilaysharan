@@ -8,6 +8,8 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
+import { allBlogs } from '@/hooks/useInjectContentMeta';
+
 import {
   ContentType,
   Frontmatter,
@@ -38,19 +40,9 @@ export async function getFileSlugArray(type: ContentType) {
  * @returns {Promise<{code: string, frontmatter: Frontmatter}>} - A promise that resolves to an object containing the code and frontmatter of the file.
  */
 export async function getFileBySlug(
-  type: ContentType,
+  source: string,
   slug: string
 ): Promise<{ code: string; frontmatter: Frontmatter }> {
-  const source = slug
-    ? readFileSync(
-        join(process.cwd(), 'src', 'contents', type, `${slug}.mdx`),
-        'utf8'
-      )
-    : readFileSync(
-        join(process.cwd(), 'src', 'contents', `${type}.mdx`),
-        'utf8'
-      );
-
   const { code, frontmatter } = await bundleMDX({
     source,
     mdxOptions(options) {
@@ -187,4 +179,23 @@ export function getFeatured<T extends Frontmatter>(
   return features.map(
     (feat) => contents.find((content) => content.slug === feat) as T
   );
+}
+
+// function to prefetch all the routes
+export function prefetchRoutes({ type }: { type: ContentType }): {
+  slug: string;
+  source: string;
+}[] {
+  const allSlugs = allBlogs.map((blog) => blog.slug);
+  const files = allSlugs.map((slug) => {
+    return {
+      slug: slug,
+      source: readFileSync(
+        join(process.cwd(), 'src', 'contents', type, `${slug}.mdx`),
+        'utf8'
+      ),
+    };
+  });
+
+  return files;
 }

@@ -54,7 +54,7 @@ const featuredProjects: Array<ProjectFrontmatter> = [
   },
 ];
 
-const allProjects: Array<ProjectFrontmatter> = [
+export const allProjects: Array<ProjectFrontmatter> = [
   {
     slug: 'humantd',
     title: 'HumanTD',
@@ -101,7 +101,7 @@ const allProjects: Array<ProjectFrontmatter> = [
   },
 ];
 
-const allBlogs: Array<BlogFrontmatter> = [
+export const allBlogs: Array<BlogFrontmatter> = [
   {
     wordCount: 1399,
     readingTime: 7,
