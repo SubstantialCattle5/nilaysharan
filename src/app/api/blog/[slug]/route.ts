@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const file = readFileSync(
-      join(process.cwd(), 'contents', 'blog', `${slug}.mdx`),
+      join(process.cwd(), 'contents', 'blog', `service-animal.mdx`),
       'utf8'
     );
 
