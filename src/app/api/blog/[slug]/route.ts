@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     const file = await getFileBySlug('blog', slug);
 
     if (!file)
-      return new NextResponse(null, { status: 404, statusText: 'Not Found' });
+      return new NextResponse(null, { status: 404, statusText: 'Nilay' });
 
     return NextResponse.json(file);
   } catch (error) {
