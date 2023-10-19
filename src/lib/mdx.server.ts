@@ -42,14 +42,8 @@ export async function getFileBySlug(
   slug: string
 ): Promise<{ code: string; frontmatter: Frontmatter }> {
   const source = slug
-    ? readFileSync(
-        join(process.cwd(), 'public', 'contents', type, `${slug}.mdx`),
-        'utf8'
-      )
-    : readFileSync(
-        join(process.cwd(), 'public', 'contents', `${type}.mdx`),
-        'utf8'
-      );
+    ? readFileSync(join(process.cwd(), 'contents', type, `${slug}.mdx`), 'utf8')
+    : readFileSync(join(process.cwd(), 'contents', `${type}.mdx`), 'utf8');
 
   const { code, frontmatter } = await bundleMDX({
     source,
