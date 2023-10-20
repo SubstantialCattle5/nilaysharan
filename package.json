@@ -22,6 +22,7 @@
     "@cloudinary/url-gen": "^1.11.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/lodash": "^4.14.199",
+    "@vercel/analytics": "^1.1.1",
     "axios": "^1.5.1",
     "class-variance-authority": "^0.7.0",
     "cloudinary-build-url": "^0.2.4",

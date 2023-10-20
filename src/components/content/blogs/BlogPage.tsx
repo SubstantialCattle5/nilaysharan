@@ -1,9 +1,11 @@
+import { format } from 'date-fns';
 import { getMDXComponent } from 'mdx-bundler/client';
 import React from 'react';
 import { HiOutlineClock } from 'react-icons/hi';
 
 import useScrollSpy from '@/hooks/useScrollSpy';
 
+import Accent from '@/components/Accent';
 import MDXComponents from '@/components/content/MDXComponents';
 import TableOfContents, {
   HeadingScrollSpy,
@@ -54,13 +56,13 @@ const BlogPage = ({ code, frontmatter }: BlogType) => {
 
               <p className='mt-2 text-sm text-gray-600 dark:text-gray-300'>
                 Written on{' '}
-                {/* {format(new Date(frontmatter.publishedAt), 'MMMM dd, yyyy')} by */}
+                {format(new Date(frontmatter.publishedAt), 'MMMM dd, yyyy')} by
                 Nilay Nath Sharan.
               </p>
               <div className='mt-6 flex items-center justify-start gap-2 text-sm font-medium text-gray-600 dark:text-gray-300'>
                 <div className='flex items-center gap-1'>
                   <HiOutlineClock className='inline-block text-base' />
-                  {/* <Accent>{frontmattcodeer.readingTime.text}</Accent> */}
+                  <Accent>{frontmatter.readingTime.text}</Accent>
                 </div>
               </div>
             </div>
