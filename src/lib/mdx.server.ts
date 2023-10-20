@@ -3,10 +3,6 @@ import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import { join } from 'path';
 import readingTime from 'reading-time';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
 
 import {
   ContentType,
@@ -43,27 +39,6 @@ export async function getFileBySlug(
 ): Promise<{ code: string; frontmatter: Frontmatter }> {
   const { code, frontmatter } = await bundleMDX({
     source,
-    mdxOptions(options) {
-      options.remarkPlugins = [...(options?.remarkPlugins ?? []), remarkGfm];
-      options.rehypePlugins = [
-        ...(options?.rehypePlugins ?? []),
-        rehypeSlug,
-        () =>
-          rehypePrettyCode({
-            theme: 'css-variables',
-          }),
-        [
-          rehypeAutolinkHeadings,
-          {
-            properties: {
-              className: ['hash-anchor'],
-            },
-          },
-        ],
-      ];
-
-      return options;
-    },
   });
 
   return {
