@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { preFetch } from '@/lib/mdx.server';
+import { getFileBySlug, preFetch } from '@/lib/mdx.server';
 
 export async function GET(req: NextRequest) {
   const BASE_URL = `${req.nextUrl.origin}/api/blog/`;
@@ -13,15 +13,15 @@ export async function GET(req: NextRequest) {
   try {
     const preRoutes = preFetch({ type: 'blog' });
     const preRoute = preRoutes.find((route) => route.slug === slug);
-    // const file = await getFileBySlug(
-    //   preRoute?.source as string,
-    //   preRoute?.slug as string
-    // );
+    const file = await getFileBySlug(
+      preRoute?.source as string,
+      preRoute?.slug as string
+    );
 
-    // if (!file)
-    //   return new NextResponse(null, { status: 404, statusText: 'Not found ' });
+    if (!file)
+      return new NextResponse(null, { status: 404, statusText: 'Not found ' });
 
-    return NextResponse.json(preRoute);
+    return NextResponse.json(file);
   } catch (error) {
     return NextResponse.json({ error: error });
   }
