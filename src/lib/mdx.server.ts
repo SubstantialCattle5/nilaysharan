@@ -3,10 +3,6 @@ import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import { join } from 'path';
 import readingTime from 'reading-time';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
 
 import {
   ContentType,
@@ -38,42 +34,11 @@ export async function getFileSlugArray(type: ContentType) {
  * @returns {Promise<{code: string, frontmatter: Frontmatter}>} - A promise that resolves to an object containing the code and frontmatter of the file.
  */
 export async function getFileBySlug(
-  type: ContentType,
+  source: string,
   slug: string
 ): Promise<{ code: string; frontmatter: Frontmatter }> {
-  const source = slug
-    ? readFileSync(
-        join(process.cwd(), 'src', 'contents', type, `${slug}.mdx`),
-        'utf8'
-      )
-    : readFileSync(
-        join(process.cwd(), 'src', 'contents', `${type}.mdx`),
-        'utf8'
-      );
-
   const { code, frontmatter } = await bundleMDX({
     source,
-    mdxOptions(options) {
-      options.remarkPlugins = [...(options?.remarkPlugins ?? []), remarkGfm];
-      options.rehypePlugins = [
-        ...(options?.rehypePlugins ?? []),
-        rehypeSlug,
-        () =>
-          rehypePrettyCode({
-            theme: 'css-variables',
-          }),
-        [
-          rehypeAutolinkHeadings,
-          {
-            properties: {
-              className: ['hash-anchor'],
-            },
-          },
-        ],
-      ];
-
-      return options;
-    },
   });
 
   return {
@@ -187,4 +152,31 @@ export function getFeatured<T extends Frontmatter>(
   return features.map(
     (feat) => contents.find((content) => content.slug === feat) as T
   );
+}
+
+export function preFetch({ type }: { type: string }) {
+  const service = readFileSync(
+    join(process.cwd(), 'public', 'contents', type, 'service-animal.mdx'),
+    'utf8'
+  );
+  const pather = readFileSync(
+    join(
+      process.cwd(),
+      'public',
+      'contents',
+      type,
+      'pather-panchali-the-enduring-impact-on-modern-indian-cinema.mdx'
+    ),
+    'utf8'
+  );
+
+  const blogs = [
+    { slug: 'service-animal', source: service },
+    {
+      slug: 'pather-panchali-the-enduring-impact-on-modern-indian-cinema',
+      source: pather,
+    },
+  ];
+
+  return blogs;
 }
