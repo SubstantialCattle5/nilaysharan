@@ -26,7 +26,7 @@ const Page = () => {
               <Accent>Projects</Accent>
             </h1>
             <p data-fade='1' className='mt-2 text-gray-600 dark:text-gray-300'>
-              Showcase of my works on frontend development.
+              Some of the interesting projects I've worked over the years.
             </p>
 
             <ul

@@ -84,8 +84,7 @@ const Page = () => {
               <Accent>Blog </Accent>
             </h1>
             <p className='mt-2 text-gray-600 dark:text-gray-300' data-fade='1'>
-              Thoughts, mental models, and tutorials about front-end
-              development.
+              General thoughts, tutorials, and guides.
             </p>
             <StyledInput
               data-fade='2'

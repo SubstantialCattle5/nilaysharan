@@ -48,35 +48,32 @@ const Page = () => {
               />
               <article className=''>
                 <p data-fade='3'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum auctor ex vel nibh tempus, id suscipit mauris
-                  ullamcorper. Integer at elit in arcu laoreet varius. Sed
-                  congue, ex vel fermentum fermentum, eros dui commodo ligula,
-                  vel viverra augue orci at libero. Vestibulum euismod mauris
-                  sed est fermentum, non dapibus elit vestibulum. Pellentesque
-                  quis sem sit amet odio ultricies tincidunt. Vestibulum
-                  efficitur, ligula ut volutpat efficitur, odio dolor dignissim
-                  arcu, in viverra dui justo a libero.
+                  I'm a programmer based in India. I specialize in backend
+                  development and have a keen interest in both cybersecurity and
+                  frontend development. My programming journey began in 2021
+                  when I joined college, and since then, I have been
+                  continuously working on projects and learning new skills. Over
+                  the years, I have honed my expertise and developed a passion
+                  for creating innovative solutions.
                 </p>
                 <br />
                 <p data-fade='4'>
-                  ces posuere cubilia Curae; Curabitur semper finibus justo, id
-                  dictum tellus commodo vitae. Suspendisse potenti. Quisque et
-                  sodales lectus. Suspendisse euismod leo eu tincidunt luctus.
-                  Fusce dictum, odio vel ullamcorper cursus, elit odio fermentum
-                  ex, nec interdum orci felis et ligula.
+                  I find great joy in learning from feedback and criticism, so
+                  please feel free to reach out to me. I also enjoy occasional
+                  writing and creating unconventional projects, both of which
+                  you can find featured here. Thank you for visiting, and I hope
+                  you enjoy it!
                 </p>
                 <br />
                 <p data-fade='5'>
-                  ces posuere cubilia Curae; Curabitur semper finibus justo, id
-                  dictum tellus commodo vitae. Suspendisse potenti. Quisque et
-                  sodales lectus. Suspendisse euismod leo eu tincidunt luctus.
-                  Fusce dictum, odio vel ullamcorper cursus, elit odio fermentum
-                  ex, nec interdum orci felis et ligula.
+                  Thank you for visiting, and I hope you enjoy it!
                 </p>
+                <br />
               </article>
-              <h3 className='mt-12'>Current Favourite Stack:</h3>
-              <figure className='mt-2'>
+              <h3 className='mt-12' data-fade='5'>
+                Current Favourite Stack:
+              </h3>
+              <figure className='mt-2' data-fade='6'>
                 <TechStack />
               </figure>
             </div>
@@ -86,14 +83,8 @@ const Page = () => {
         <section>
           <div className='layout py-6'>
             <h2 className='mb-4'>Contact</h2>
-            <em>
-              "If the rise of an all-powerful artificial intelligence is
-              inevitable, well it stands to reason that when they take power,
-              our digital overlords will punish those of us who did not help
-              them get there. Ergo, I would like to be a helpful idiot." -
-              <Accent>Gilfoyle</Accent>
-            </em>
-            <article className='prose dark:prose-invert mt-4'>
+
+            <article className=''>
               <p>
                 If you have a project that you want to get started, think you
                 need my help with something or just fancy talking about world

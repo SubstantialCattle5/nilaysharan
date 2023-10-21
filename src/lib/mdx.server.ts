@@ -169,12 +169,26 @@ export function preFetch({ type }: { type: string }) {
     ),
     'utf8'
   );
+  const routing = readFileSync(
+    join(
+      process.cwd(),
+      'public',
+      'contents',
+      type,
+      'routing-protocol-the-invisible-force-that-powers-the-internet.mdx'
+    ),
+    'utf8'
+  );
 
   const blogs = [
     { slug: 'service-animal', source: service },
     {
       slug: 'pather-panchali-the-enduring-impact-on-modern-indian-cinema',
       source: pather,
+    },
+    {
+      slug: 'routing-protocol-the-invisible-force-that-powers-the-internet',
+      source: routing,
     },
   ];
 
