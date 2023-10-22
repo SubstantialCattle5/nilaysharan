@@ -4,7 +4,6 @@ import * as React from 'react';
 import Typewriter from 'typewriter-effect';
 
 import ProjectPage from '@/components/content/projects/ProjectPage';
-import Seo from '@/components/Seo';
 
 import { ProjectFrontmatter } from '@/types/frontmatters';
 
@@ -47,10 +46,6 @@ export default function PagePage() {
 
   return (
     <>
-      <Seo
-        templateTitle='Projects'
-        description="Showcase of my projects on front-end development that I'm proud of."
-      />
       <main>
         <ProjectPage {...data} />
       </main>

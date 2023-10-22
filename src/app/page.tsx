@@ -14,7 +14,6 @@ import ProjectCard from '@/components/content/projects/ProjectCard';
 import ButtonLink from '@/components/links/ButtonLink';
 import CustomLink from '@/components/links/CustomLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
-import Seo from '@/components/Seo';
 
 import { BlogFrontmatter, ProjectFrontmatter } from '@/types/frontmatters';
 
@@ -35,7 +34,6 @@ export default function HomePage() {
   const populatedPosts = useInjectContentMeta('blog', 'featuredBlogs') || [];
   return (
     <>
-      <Seo />
       <main>
         <section
           className={clsx(
