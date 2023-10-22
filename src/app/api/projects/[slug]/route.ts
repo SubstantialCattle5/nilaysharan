@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getFileBySlug, preFetch } from '@/lib/mdx.server';
 
 export async function GET(req: NextRequest) {
-  const BASE_URL = `${req.nextUrl.origin}/api/blog/`;
+  const BASE_URL = `${req.nextUrl.origin}/api/projects/`;
   const url = new URL(req.url || '', BASE_URL);
 
   const slug = url.pathname.split('/').pop() || '';
@@ -11,9 +11,8 @@ export async function GET(req: NextRequest) {
   if (!slug) return new NextResponse(null, { status: 404 });
 
   try {
-    const preRoutes = preFetch({ type: 'blog' });
+    const preRoutes = preFetch({ type: 'projects' });
     const preRoute = preRoutes?.find((route) => route.slug === slug);
-    if (!preRoute) return new NextResponse(null, { status: 404 });
     const file = await getFileBySlug(
       preRoute?.source as string,
       preRoute?.slug as string

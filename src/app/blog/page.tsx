@@ -11,6 +11,7 @@ import BlogCard from '@/components/content/blogs/BlogCard';
 import ContentPlaceholder from '@/components/content/ContenPlaceholder';
 import StyledInput from '@/components/content/form/StyledInput';
 import Tag, { SkipNavTag } from '@/components/content/Tag';
+import Seo from '@/components/Seo';
 
 import { BlogFrontmatter } from '@/types/frontmatters';
 
@@ -77,6 +78,10 @@ const Page = () => {
 
   return (
     <>
+      <Seo
+        templateTitle='Blog'
+        description='Thoughts, mental models, and tutorials about front-end development. Rebuild your mental model so front-end development can be predictable.'
+      />
       <main>
         <section className={clsx(isLoaded && 'fade-in-start')}>
           <div className='layout py-12'>
