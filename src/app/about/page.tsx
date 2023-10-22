@@ -61,8 +61,7 @@ const Page = () => {
                   I find great joy in learning from feedback and criticism, so
                   please feel free to reach out to me. I also enjoy occasional
                   writing and creating unconventional projects, both of which
-                  you can find featured here. Thank you for visiting, and I hope
-                  you enjoy it!
+                  you can find featured here.
                 </p>
                 <br />
                 <p data-fade='5'>
