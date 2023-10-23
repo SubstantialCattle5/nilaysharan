@@ -199,7 +199,30 @@ export function preFetch({ type }: { type: ContentType }) {
       join(process.cwd(), 'public', 'contents', type, 'humantd.mdx'),
       'utf8'
     );
-    const projects = [{ slug: 'humantd', source: humantd }];
+    const medbud = readFileSync(
+      join(process.cwd(), 'public', 'contents', type, 'medbud.mdx'),
+      'utf8'
+    );
+    const echoes = readFileSync(
+      join(process.cwd(), 'public', 'contents', type, 'echoes.mdx'),
+      'utf8'
+    );
+    const social = readFileSync(
+      join(
+        process.cwd(),
+        'public',
+        'contents',
+        type,
+        'social-media-backend.mdx'
+      ),
+      'utf8'
+    );
+    const projects = [
+      { slug: 'humantd', source: humantd },
+      { slug: 'medbud', source: medbud },
+      { slug: 'echoes', source: echoes },
+      { slug: 'social-media-backend', source: social },
+    ];
 
     return projects;
   }

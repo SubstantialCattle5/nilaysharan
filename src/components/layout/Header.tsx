@@ -84,6 +84,4 @@ const links = [
   { href: '/blog', label: 'Blog' },
   { href: '/projects', label: 'Projects' },
   { href: '/about', label: 'About' },
-  { href: '/tech', label: 'Tech' },
-  { href: '/contact', label: 'Contact' },
 ];

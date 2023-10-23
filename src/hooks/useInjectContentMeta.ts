@@ -91,12 +91,12 @@ export const allProjects: Array<ProjectFrontmatter> = [
     banner: 'nilaysharan/project/hestia/banner',
   },
   {
-    slug: 'socialmediabackend',
+    slug: 'social-media-backend',
     title: 'Social Media Backend',
     publishedAt: '2021-02-12',
     description:
       'A Social Media Backend created with a functioning auth and tweet system.',
-    techs: 'nestjs,postgresql,prisma,typescript',
+    techs: 'nestjs,postgresql,docker,typescript,swagger',
     banner: 'nilaysharan/project/socialmediabackend/image',
   },
 ];
