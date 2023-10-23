@@ -12,7 +12,6 @@ import Accent from '@/components/Accent';
 import BlogCard from '@/components/content/blogs/BlogCard';
 import ProjectCard from '@/components/content/projects/ProjectCard';
 import ButtonLink from '@/components/links/ButtonLink';
-import CustomLink from '@/components/links/CustomLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
 import { BlogFrontmatter, ProjectFrontmatter } from '@/types/frontmatters';
@@ -72,17 +71,17 @@ export default function HomePage() {
               )}
               data-fade='3'
             >
-              I'm a programmer based in India. I try to solve real-world
-              problems and create value. I build products with robust
-              functionality and secure code.
+              I am a programmer based in India. My focus is on solving
+              real-world problems and creating value. I develop products with
+              robust functionality and secure code
             </p>
-            <p
+            {/* <p
               className='mt-3 max-w-4xl leading-relaxed text-gray-700 dark:text-gray-200 md:mt-4 md:text-lg 2xl:text-xl'
               data-fade='4'
             >
               Don't forget to sign my{' '}
               <CustomLink href='/guestbook'>guestbook</CustomLink>!
-            </p>
+            </p> */}
             <div
               data-fade='5'
               className='mt-8 flex flex-wrap gap-4 md:!text-lg'

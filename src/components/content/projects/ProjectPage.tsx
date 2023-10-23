@@ -11,7 +11,6 @@ import TableOfContents, {
 } from '@/components/content/TableOfContents';
 import CloudinaryImg from '@/components/images/CloudinaryImg';
 import CustomLink from '@/components/links/CustomLink';
-import Seo from '@/components/Seo';
 
 import { ProjectType } from '@/types/frontmatters';
 
@@ -42,14 +41,6 @@ const BlogPage = ({ code, frontmatter }: ProjectType) => {
 
   return (
     <>
-      <Seo
-        templateTitle={frontmatter.title}
-        description={frontmatter.description}
-        isBlog
-        date={new Date(
-          frontmatter.lastUpdated ?? frontmatter.publishedAt
-        ).toISOString()}
-      />
       <main>
         <section>
           <div className='layout'>

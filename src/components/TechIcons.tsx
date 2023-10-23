@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FaHardHat } from 'react-icons/fa';
 import { IoLogoVercel } from 'react-icons/io5';
 import {
+  SiDocker,
   SiEthereum,
   SiExpress,
   SiFirebase,
@@ -22,6 +23,7 @@ import {
   SiReact,
   SiRedux,
   SiSass,
+  SiSwagger,
   SiSwift,
   SiTailwindcss,
   SiTypescript,
@@ -149,5 +151,13 @@ const techList = {
   postgresql: {
     icon: SiPostgresql,
     name: 'PostgreSQL',
+  },
+  docker: {
+    icon: SiDocker,
+    name: 'Docker',
+  },
+  swagger: {
+    icon: SiSwagger,
+    name: 'Swagger',
   },
 };
