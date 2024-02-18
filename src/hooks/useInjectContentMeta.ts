@@ -103,17 +103,6 @@ export const allProjects: Array<ProjectFrontmatter> = [
 
 export const allBlogs: Array<BlogFrontmatter> = [
   {
-    wordCount: 1399,
-    readingTime: 7,
-    slug: 'pather-panchali-the-enduring-impact-on-modern-indian-cinema',
-    title: 'Pather Panchali : The Enduring Impact on Modern Indian Cinema',
-    description:
-      'Pather Panchali: Masterpiece revolutionizing Indian cinema, shaping narratives, and inspiring filmmakers worldwide.',
-    banner: 'nilaysharan/blog/pather_panchali/banner',
-    publishedAt: '2021-01-01',
-    tags: 'deep dive,movie',
-  },
-  {
     wordCount: 600,
     readingTime: 30,
     slug: 'netmasking-and-how-we-keep-shifting-problems-to-the-future',
@@ -136,7 +125,17 @@ export const allBlogs: Array<BlogFrontmatter> = [
     publishedAt: '2021-01-01',
     tags: 'album,deep dive',
   },
-
+  {
+    wordCount: 1399,
+    readingTime: 7,
+    slug: 'pather-panchali-the-enduring-impact-on-modern-indian-cinema',
+    title: 'Pather Panchali : The Enduring Impact on Modern Indian Cinema',
+    description:
+      'Pather Panchali: Masterpiece revolutionizing Indian cinema, shaping narratives, and inspiring filmmakers worldwide.',
+    banner: 'nilaysharan/blog/pather_panchali/banner',
+    publishedAt: '2021-01-01',
+    tags: 'deep dive,movie',
+  },
   {
     wordCount: 400,
     readingTime: 13,
@@ -161,4 +160,4 @@ export const allBlogs: Array<BlogFrontmatter> = [
   },
 ];
 
-const featuredBlogs: Array<BlogFrontmatter> = allBlogs.slice(0, 3);
+const featuredBlogs: Array<BlogFrontmatter> = allBlogs.slice(2, 5);
