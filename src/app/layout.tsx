@@ -42,6 +42,10 @@ export default function RootLayout({
 }) {
   return (
     <html className='antialiased'>
+      <meta
+        name='google-site-verification'
+        content='luh5nd1ELZCFHhe7YjWxXZVk55Ctg7h1YvZR1azguBk'
+      />
       <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false}>
         <Header />
         <PreloadProvider>
