@@ -93,7 +93,7 @@ export default function HomePage() {
               className='mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8'
             >
               <UnstyledLink
-                href='https://drive.google.com/file/d/11H4IsSYcpoKcyvexE9kOTwm_pDQKaiMw/view?usp=sharing'
+                href='https://drive.google.com/file/d/1D87QBhoejdIVPw2jvUNArt2KDv39t1gG/view?usp=sharing'
                 className={clsx(
                   'inline-flex items-center gap-1 text-sm font-medium md:text-base',
                   'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
