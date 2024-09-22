@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: 'Nilay Nath Sharan',
-      url: '',
+      url: 'https://www.nilaysharan.in/',
     },
   ],
 };
