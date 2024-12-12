@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nilaysharan.vercel.app
+
+# Sitemaps
+Sitemap: https://nilaysharan.vercel.app/sitemap.xml

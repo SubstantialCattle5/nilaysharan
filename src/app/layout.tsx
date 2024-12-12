@@ -1,17 +1,15 @@
-import { Analytics } from '@vercel/analytics/react';
-import { Metadata } from 'next';
-import * as React from 'react';
+import { Analytics } from "@vercel/analytics/react";
+import { Metadata } from "next";
+import * as React from "react";
 
-import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
-import '@/styles/colors.css';
+import "@/styles/globals.css";
 
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
-import { ThemeProvider } from '@/components/theme-provider';
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import { ThemeProvider } from "@/components/theme-provider";
 
-import { siteConfig } from '@/constant/config';
-import { PreloadProvider } from '@/context/PreloadContext';
+import { siteConfig } from "@/constant/config";
+import { PreloadProvider } from "@/context/PreloadContext";
 
 export const metadata: Metadata = {
   title: {
@@ -20,17 +18,16 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   robots: { index: true, follow: true },
-
   icons: {
-    icon: '/favicon/favicon.ico',
-    shortcut: '/favicon/favicon-16x16.png',
-    apple: '/favicon/apple-touch-icon.png',
+    icon: "/favicon/favicon.ico",
+    shortcut: "/favicon/favicon-16x16.png",
+    apple: "/favicon/apple-touch-icon.png",
   },
   manifest: `/favicon/site.webmanifest`,
   authors: [
     {
-      name: 'Nilay Nath Sharan',
-      url: 'https://www.nilaysharan.in/',
+      name: "Nilay Nath Sharan",
+      url: "https://www.nilaysharan.in/",
     },
   ],
 };
@@ -41,19 +38,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className='antialiased'>
-      <meta
-        name='google-site-verification'
-        content='luh5nd1ELZCFHhe7YjWxXZVk55Ctg7h1YvZR1azguBk'
-      />
-      <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false}>
-        <Header />
-        <PreloadProvider>
-          <div id='skip-nav'>{children}</div>
-        </PreloadProvider>
-        <Footer />
-      </ThemeProvider>
-      <Analytics />
+    <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="luh5nd1ELZCFHhe7YjWxXZVk55Ctg7h1YvZR1azguBk"
+        />
+      </head>
+      <body>
+        <ThemeProvider attribute="class" enableSystem={false}>
+          <Header />
+          <PreloadProvider>
+            <div id="skip-nav">{children}</div>
+          </PreloadProvider>
+          <Footer />
+        </ThemeProvider>
+        <Analytics />
+      </body>
     </html>
   );
 }

@@ -104,7 +104,7 @@ export const allProjects: Array<ProjectFrontmatter> = [
 export const allBlogs: Array<BlogFrontmatter> = [
   {
     wordCount: 600,
-    readingTime: 30,
+    readingTime: 5,
     slug: 'netmasking-and-how-we-keep-shifting-problems-to-the-future',
     title: 'Netmasking: A Band-Aid Solution for a Bleeding Network',
     description:

@@ -1,14 +1,14 @@
-import { promises, readFileSync } from 'fs';
-import matter from 'gray-matter';
-import { bundleMDX } from 'mdx-bundler';
-import { join } from 'path';
-import readingTime from 'reading-time';
+import { promises, readFileSync } from "fs";
+import matter from "gray-matter";
+import { bundleMDX } from "mdx-bundler";
+import { join } from "path";
+import readingTime from "reading-time";
 
 import {
   ContentType,
   Frontmatter,
   PickFrontmatter,
-} from '@/types/frontmatters';
+} from "@/types/frontmatters";
 
 /**
  * This function returns an array of file slugs.
@@ -16,22 +16,21 @@ import {
  * @returns {Promise<Array<string>>} - A promise that resolves to an array of file slugs.
  */
 export async function getFileSlugArray(type: ContentType) {
-  return getFileList(join(process.cwd(), 'src', 'contents', type)).then(
+  return getFileList(join(process.cwd(), "src", "contents", type)).then(
     (paths) =>
       paths.map((path) =>
         path
-          .replace(join(process.cwd(), 'src', 'contents', type) + '/', '')
-          .replace('.mdx', '')
-          .split('/')
+          .replace(join(process.cwd(), "src", "contents", type) + "/", "")
+          .replace(".mdx", "")
+          .split("/")
       )
   );
 }
 
 /**
  * This function returns the content of a file by its slug.
- * @param {ContentType} type - The content type.
  * @param {string} slug - The slug of the file.
- * @returns {Promise<{code: string, frontmatter: Frontmatter}>} - A promise that resolves to an object containing the code and frontmatter of the file.
+ * @returns {Promise<{code: string;frontmatter: Frontmatter;}>} - A promise that resolves to an object containing the code and frontmatter of the file.
  */
 export async function getFileBySlug(
   source: string,
@@ -82,18 +81,18 @@ const getFileList = async (dirName: string) => {
  * @returns {Promise<Array<PickFrontmatter<T>>>} - A promise that resolves to an array of frontmatter objects.
  */
 export async function getAllFilesFrontmatter<T extends ContentType>(type: T) {
-  const files = await getFileList(join(process.cwd(), 'src', 'contents', type));
+  const files = await getFileList(join(process.cwd(), "src", "contents", type));
 
   return files.reduce((allPosts: Array<PickFrontmatter<T>>, absolutePath) => {
-    const source = readFileSync(absolutePath, 'utf8');
+    const source = readFileSync(absolutePath, "utf8");
     const { data } = matter(source);
 
     const res = [
       {
         ...(data as PickFrontmatter<T>),
         slug: absolutePath
-          .replace(join(process.cwd(), 'src', 'contents', type) + '/', '')
-          .replace('.mdx', ''),
+          .replace(join(process.cwd(), "src", "contents", type) + "/", "")
+          .replace(".mdx", ""),
         readingTime: readingTime(source),
       },
       ...allPosts,
@@ -108,19 +107,19 @@ export async function getAllFilesFrontmatter<T extends ContentType>(type: T) {
  * @returns {Promise<Array<PickFrontmatter<'blog'>>>} - A promise that resolves to an array of recommended blog posts.
  */
 export async function getRecommendations(currSlug: string) {
-  const frontmatters = await getAllFilesFrontmatter('blog');
+  const frontmatters = await getAllFilesFrontmatter("blog");
 
   // Get current frontmatter
   const currentFm = frontmatters.find((fm) => fm.slug === currSlug);
 
   // Remove currentFm and Bahasa Posts, then randomize order
   const otherFms = frontmatters
-    .filter((fm) => !fm.slug.startsWith('id-') && fm.slug !== currSlug)
+    .filter((fm) => !fm.slug.startsWith("id-") && fm.slug !== currSlug)
     .sort(() => Math.random() - 0.5);
 
   // Find with similar tags
   const recommendations = otherFms.filter((op) =>
-    op.tags.split(',').some((p) => currentFm?.tags.split(',').includes(p))
+    op.tags.split(",").some((p) => currentFm?.tags.split(",").includes(p))
   );
 
   // Populate with random recommendations if not enough
@@ -154,76 +153,44 @@ export function getFeatured<T extends Frontmatter>(
   );
 }
 
-export function preFetch({ type }: { type: ContentType }) {
-  if (type === 'blog') {
-    const service = readFileSync(
-      join(process.cwd(), 'public', 'contents', type, 'service-animal.mdx'),
-      'utf8'
-    );
-    const pather = readFileSync(
-      join(
-        process.cwd(),
-        'public',
-        'contents',
-        type,
-        'pather-panchali-the-enduring-impact-on-modern-indian-cinema.mdx'
-      ),
-      'utf8'
-    );
-    const routing = readFileSync(
-      join(
-        process.cwd(),
-        'public',
-        'contents',
-        type,
-        'routing-protocol-the-invisible-force-that-powers-the-internet.mdx'
-      ),
-      'utf8'
-    );
+function readMDXFile(fileName: string, type: string) {
+  return readFileSync(
+    join(process.cwd(), "public", "contents", type, fileName),
+    "utf8"
+  );
+}
 
-    const blogs = [
-      { slug: 'service-animal', source: service },
-      {
-        slug: 'pather-panchali-the-enduring-impact-on-modern-indian-cinema',
-        source: pather,
-      },
-      {
-        slug: 'routing-protocol-the-invisible-force-that-powers-the-internet',
-        source: routing,
-      },
+export function preFetch({ type }: { type: ContentType }) {
+  if (type === "blog") {
+    const blogFiles = [
+      "service-animal.mdx",
+      "netmasking-and-how-we-keep-shifting-problems-to-the-future.mdx",
+      "pather-panchali-the-enduring-impact-on-modern-indian-cinema.mdx",
+      "routing-protocol-the-invisible-force-that-powers-the-internet.mdx",
+      "deep-dive-on-the-madcap-laughs-by-syd-barrett.mdx",
     ];
+
+    const blogs = blogFiles.map((file) => ({
+      slug: file.split(".mdx")[0], // Extract slug from filename
+      source: readMDXFile(file, type),
+    }));
 
     return blogs;
-  } else if (type === 'projects') {
-    const humantd = readFileSync(
-      join(process.cwd(), 'public', 'contents', type, 'humantd.mdx'),
-      'utf8'
-    );
-    const medbud = readFileSync(
-      join(process.cwd(), 'public', 'contents', type, 'medbud.mdx'),
-      'utf8'
-    );
-    const echoes = readFileSync(
-      join(process.cwd(), 'public', 'contents', type, 'echoes.mdx'),
-      'utf8'
-    );
-    const social = readFileSync(
-      join(
-        process.cwd(),
-        'public',
-        'contents',
-        type,
-        'social-media-backend.mdx'
-      ),
-      'utf8'
-    );
-    const projects = [
-      { slug: 'humantd', source: humantd },
-      { slug: 'medbud', source: medbud },
-      { slug: 'echoes', source: echoes },
-      { slug: 'social-media-backend', source: social },
+  } else if (type === "projects") {
+    const projectFiles = [
+      "humantd.mdx",
+      "medbud.mdx",
+      "echoes.mdx",
+      "social-media-backend.mdx",
     ];
+
+    const projects = projectFiles.map((file) => ({
+      slug: file.split(".mdx")[0], // Extract slug from filename
+      source: readMDXFile(file, type),
+    }));
 
     return projects;
   }
+
+  return [];
 }

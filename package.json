@@ -1,5 +1,5 @@
 {
-  "name": "ts-nextjs-tailwind-starter",
+  "name": "nilay_personal_website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -32,10 +32,10 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.260.0",
     "mdx-bundler": "^9.2.1",
-    "next": "^13.5.4",
+    "next": "^15.1.0",
     "next-themes": "^0.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-icons": "^4.11.0",
     "react-image-lightbox": "^5.1.4",
     "react-intersection-observer": "^9.5.2",
