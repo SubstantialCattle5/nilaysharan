@@ -1,20 +1,20 @@
-'use client';
-import clsx from 'clsx';
-import * as React from 'react';
-import { IoArrowDownOutline, IoNewspaperSharp } from 'react-icons/io5';
-import { SiGithub, SiInstagram } from 'react-icons/si';
-import Typewriter from 'typewriter-effect';
+"use client";
+import clsx from "clsx";
+import * as React from "react";
+import { IoArrowDownOutline, IoNewspaperSharp } from "react-icons/io5";
+import { SiGithub, SiInstagram } from "react-icons/si";
+import Typewriter from "typewriter-effect";
 
-import useInjectContentMeta from '@/hooks/useInjectContentMeta';
-import useLoaded from '@/hooks/useLoaded';
+import useInjectContentMeta from "@/hooks/useInjectContentMeta";
+import useLoaded from "@/hooks/useLoaded";
 
-import Accent from '@/components/Accent';
-import BlogCard from '@/components/content/blogs/BlogCard';
-import ProjectCard from '@/components/content/projects/ProjectCard';
-import ButtonLink from '@/components/links/ButtonLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
+import Accent from "@/components/Accent";
+import BlogCard from "@/components/content/blogs/BlogCard";
+import ProjectCard from "@/components/content/projects/ProjectCard";
+import ButtonLink from "@/components/links/ButtonLink";
+import UnstyledLink from "@/components/links/UnstyledLink";
 
-import { BlogFrontmatter, ProjectFrontmatter } from '@/types/frontmatters';
+import { BlogFrontmatter, ProjectFrontmatter } from "@/types/frontmatters";
 
 /**
  * SVGR Support
@@ -29,29 +29,29 @@ import { BlogFrontmatter, ProjectFrontmatter } from '@/types/frontmatters';
 export default function HomePage() {
   const isLoaded = useLoaded();
   const populatedProjects =
-    useInjectContentMeta('projects', 'featuredProjects') || [];
-  const populatedPosts = useInjectContentMeta('blog', 'featuredBlogs') || [];
+    useInjectContentMeta("projects", "featuredProjects") || [];
+  const populatedPosts = useInjectContentMeta("blog", "featuredBlogs") || [];
   return (
     <>
       <main>
         <section
           className={clsx(
-            'min-h-main -mt-20 mb-20 flex flex-col justify-center',
-            isLoaded && 'fade-in-start'
+            "min-h-main -mt-20 mb-20 flex flex-col justify-center",
+            isLoaded && "fade-in-start"
           )}
         >
-          <article className='layout'>
-            <h2 className='text-2xl md:text-4xl 2xl:text-5xl' data-fade='1'>
+          <article className="layout">
+            <h2 className="text-2xl md:text-4xl 2xl:text-5xl" data-fade="1">
               <Typewriter
                 options={{
                   strings: [
-                    'Hello!',
-                    'नमस्ते!',
-                    'ہیلو!',
-                    'ನಮಸ್ಕಾರ!',
-                    'Привет!',
-                    'Olá!',
-                    'שָׁלוֹם!',
+                    "Hello!",
+                    "नमस्ते!",
+                    "ہیلو!",
+                    "ನಮಸ್ಕಾರ!",
+                    "Привет!",
+                    "Olá!",
+                    "שָׁלוֹם!",
                   ],
                   autoStart: true,
                   loop: true,
@@ -59,17 +59,17 @@ export default function HomePage() {
               />
             </h2>
             <h1
-              className='mt-1 text-3xl md:text-5xl 2xl:text-6xl'
-              data-fade='2'
+              className="mt-1 text-3xl md:text-5xl 2xl:text-6xl"
+              data-fade="2"
             >
               You can call me <Accent>Nilay</Accent>
             </h1>
             <p
               className={clsx(
-                'mt-4 max-w-4xl text-gray-700 dark:text-gray-200 md:mt-6',
-                'md:text-lg 2xl:text-xl'
+                "mt-4 max-w-4xl text-gray-700 dark:text-gray-200 md:mt-6",
+                "md:text-lg 2xl:text-xl"
               )}
-              data-fade='3'
+              data-fade="3"
             >
               I am a programmer based in India. My focus is on solving
               real-world problems and creating value. I develop products with
@@ -83,109 +83,109 @@ export default function HomePage() {
               <CustomLink href='/guestbook'>guestbook</CustomLink>!
             </p> */}
             <div
-              data-fade='5'
-              className='mt-8 flex flex-wrap gap-4 md:!text-lg'
+              data-fade="5"
+              className="mt-8 flex flex-wrap gap-4 md:!text-lg"
             >
-              <ButtonLink href='/about'>About me!</ButtonLink>
+              <ButtonLink href="/about">About me!</ButtonLink>
             </div>
             <div
-              data-fade='6'
-              className='mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8'
+              data-fade="6"
+              className="mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8"
             >
               <UnstyledLink
-                href='https://drive.google.com/file/d/1D87QBhoejdIVPw2jvUNArt2KDv39t1gG/view?usp=sharing'
+                href="https://drive.google.com/file/d/1ZuCOhavAZ96aWOMxCCOpf5arUuKJetWg/view"
                 className={clsx(
-                  'inline-flex items-center gap-1 text-sm font-medium md:text-base',
-                  'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
-                  'focus-visible:ring-primary-300 focus:outline-none focus-visible:ring',
-                  'transition-colors'
+                  "inline-flex items-center gap-1 text-sm font-medium md:text-base",
+                  "text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white",
+                  "focus-visible:ring-primary-300 focus:outline-none focus-visible:ring",
+                  "transition-colors"
                 )}
               >
-                <IoNewspaperSharp className='shrink-0' />
+                <IoNewspaperSharp className="shrink-0" />
                 <span>Resume</span>
               </UnstyledLink>
               <UnstyledLink
-                href='https://www.instagram.com/nilay.sharan/'
+                href="https://www.instagram.com/nilay.sharan/"
                 className={clsx(
-                  'inline-flex items-center gap-1 text-sm font-medium md:text-base',
-                  'group text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
-                  'focus-visible:ring-primary-300 focus:outline-none focus-visible:ring',
-                  'transition-colors'
+                  "inline-flex items-center gap-1 text-sm font-medium md:text-base",
+                  "group text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white",
+                  "focus-visible:ring-primary-300 focus:outline-none focus-visible:ring",
+                  "transition-colors"
                 )}
               >
-                <SiInstagram className='group-hover:text-red shrink-0 transition-colors' />
+                <SiInstagram className="group-hover:text-red shrink-0 transition-colors" />
                 <span>nilay.sharan</span>
               </UnstyledLink>
               <UnstyledLink
-                href='https://github.com/substantialcattle5'
+                href="https://github.com/substantialcattle5"
                 className={clsx(
-                  'inline-flex items-center gap-1 text-sm font-medium md:text-base',
-                  'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
-                  'focus-visible:ring-primary-300 focus:outline-none focus-visible:ring',
-                  'transition-colors'
+                  "inline-flex items-center gap-1 text-sm font-medium md:text-base",
+                  "text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white",
+                  "focus-visible:ring-primary-300 focus:outline-none focus-visible:ring",
+                  "transition-colors"
                 )}
               >
-                <SiGithub className='shrink-0' />
+                <SiGithub className="shrink-0" />
                 <span>SubstantialCattle5</span>
               </UnstyledLink>
             </div>
           </article>
           <UnstyledLink
-            href='#intro'
+            href="#intro"
             className={clsx(
-              'absolute bottom-2 left-1/2 -translate-x-1/2 md:bottom-10',
-              'cursor-pointer rounded-md transition-colors',
-              'hover:text-primary-300 focus-visible:text-primary-300'
+              "absolute bottom-2 left-1/2 -translate-x-1/2 md:bottom-10",
+              "cursor-pointer rounded-md transition-colors",
+              "hover:text-primary-300 focus-visible:text-primary-300"
             )}
           >
-            <IoArrowDownOutline className='h-8 w-8 animate-bounce md:h-10 md:w-10' />
+            <IoArrowDownOutline className="h-8 w-8 animate-bounce md:h-10 md:w-10" />
           </UnstyledLink>
         </section>
         {/* Projects */}
-        <section className={clsx('fade-in-start py-20')}>
-          <article className='layout' data-fade='0'>
-            <h2 className='text-2xl md:text-4xl' id='projects'>
+        <section className={clsx("fade-in-start py-20")}>
+          <article className="layout" data-fade="0">
+            <h2 className="text-2xl md:text-4xl" id="projects">
               <Accent>Curated Projects</Accent>
             </h2>
-            <p className='mt-2 text-gray-600 dark:text-gray-300'>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
               Below are some of my favorite projects over the years, a few of
               which have been featured in Yantra, Social Transformers, Devsoc
               and more.
             </p>
-            <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {populatedProjects.map((project, i) => (
                 <ProjectCard
                   key={project.slug}
                   project={project as ProjectFrontmatter}
-                  className={clsx(i > 2 && 'hidden sm:block')}
+                  className={clsx(i > 2 && "hidden sm:block")}
                 />
               ))}
             </ul>
-            <ButtonLink className='mt-4' href='/projects'>
+            <ButtonLink className="mt-4" href="/projects">
               See more project
             </ButtonLink>
           </article>
         </section>
         {/* Blogs */}
-        <section className={clsx('fade-in-start py-20')}>
-          <article className='layout' data-fade='0'>
-            <h2 className='text-2xl md:text-4xl' id='blog'>
+        <section className={clsx("fade-in-start py-20")}>
+          <article className="layout" data-fade="0">
+            <h2 className="text-2xl md:text-4xl" id="blog">
               <Accent>Blogs Archive</Accent>
             </h2>
-            <p className='mt-2 text-gray-600 dark:text-gray-300'>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
               When I'm not working on projects, I enjoy travelling, taking
               pictures and writing blogs. Here are a few select.
             </p>
-            <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {populatedPosts.map((post, i) => (
                 <BlogCard
                   key={post.slug}
                   post={post as BlogFrontmatter}
-                  className={clsx(i > 2 && 'hidden sm:block')}
+                  className={clsx(i > 2 && "hidden sm:block")}
                 />
               ))}
             </ul>
-            <ButtonLink className='mt-4' href='/blog'>
+            <ButtonLink className="mt-4" href="/blog">
               See more Blogs
             </ButtonLink>
           </article>
