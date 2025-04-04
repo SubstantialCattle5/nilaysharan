@@ -30,7 +30,7 @@ export default function HomePage() {
   const isLoaded = useLoaded();
   const populatedProjects =
     useInjectContentMeta("projects", "featuredProjects") || [];
-  const populatedPosts = useInjectContentMeta("blog", "featuredBlogs") || [];
+  const populatedPosts = useInjectContentMeta("archive", "featuredBlogs") || [];
   return (
     <>
       <main>
