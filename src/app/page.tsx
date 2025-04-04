@@ -131,7 +131,7 @@ export default function HomePage() {
             </div>
           </article>
           <UnstyledLink
-            href="#intro"
+            href="#projects"
             className={clsx(
               "absolute bottom-2 left-1/2 -translate-x-1/2 md:bottom-10",
               "cursor-pointer rounded-md transition-colors",
