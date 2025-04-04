@@ -81,7 +81,7 @@ const Page = () => {
         <section className={clsx(isLoaded && "fade-in-start")}>
           <div className="layout py-12">
             <h1 className="text-3xl md:text-5xl" data-fade="0">
-              <Accent>Blog </Accent>
+              <Accent>Archives</Accent>
             </h1>
             <p className="mt-2 text-gray-600 dark:text-gray-300" data-fade="1">
               General thoughts, tutorials, and guides.

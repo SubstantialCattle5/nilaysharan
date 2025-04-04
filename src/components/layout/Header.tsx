@@ -81,7 +81,7 @@ export default Header;
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/archive', label: 'Archives' },
   { href: '/projects', label: 'Projects' },
   { href: '/about', label: 'About' },
 ];

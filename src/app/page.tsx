@@ -170,7 +170,7 @@ export default function HomePage() {
         <section className={clsx("fade-in-start py-20")}>
           <article className="layout" data-fade="0">
             <h2 className="text-2xl md:text-4xl" id="blog">
-              <Accent>Blogs Archive</Accent>
+              <Accent>Archives</Accent>
             </h2>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
               When I'm not working on projects, I enjoy travelling, taking
@@ -185,8 +185,8 @@ export default function HomePage() {
                 />
               ))}
             </ul>
-            <ButtonLink className="mt-4" href="/blog">
-              See more Blogs
+            <ButtonLink className="mt-4" href="/archive">
+              See more →
             </ButtonLink>
           </article>
         </section>
