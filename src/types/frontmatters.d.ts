@@ -14,7 +14,7 @@ export type BlogFrontmatter = {
   repost?: string;
 };
 
-export type ContentType = 'blog' | 'library' | 'projects';
+export type ContentType = 'blog' | 'library' | 'projects' | 'archive';
 
 export type PickFrontmatter<T extends ContentType> = T extends 'blog'
   ? BlogFrontmatter
