@@ -1,6 +1,6 @@
 export const siteConfig = {
-  title: 'Nilay Sharan',
+  title: "Nilay Sharan",
   description:
-    'A website for Nilay Sharan, a software engineer who loves to build things.',
-  url: 'https://www.nilaysharan.in',
+    "The digital home of Nilay Sharan — software engineer, builder, and lifelong learner. Crafting clean code, scalable systems, and meaningful experiences.",
+  url: "https://www.nilaysharan.com",
 };
