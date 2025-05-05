@@ -1,8 +1,9 @@
-import clsx from 'clsx';
-import * as React from 'react';
-import { FaHardHat } from 'react-icons/fa';
-import { IoLogoVercel } from 'react-icons/io5';
+import clsx from "clsx";
+import * as React from "react";
+import { FaHardHat, FaPython, FaTerminal } from "react-icons/fa";
+import { IoLogoVercel } from "react-icons/io5";
 import {
+  SiDjango,
   SiDocker,
   SiEthereum,
   SiExpress,
@@ -27,16 +28,20 @@ import {
   SiSwift,
   SiTailwindcss,
   SiTypescript,
-} from 'react-icons/si';
+} from "react-icons/si";
+import { RiP2PFill } from "react-icons/ri";
+
+import { FaGolang } from "react-icons/fa6";
+
 export type TechListType = keyof typeof techList;
 
 export type TechIconsProps = {
   techs: Array<TechListType>;
-} & React.ComponentPropsWithoutRef<'ul'>;
+} & React.ComponentPropsWithoutRef<"ul">;
 
 export default function TechIcons({ className, techs }: TechIconsProps) {
   return (
-    <ul className={clsx(className, 'flex gap-2')}>
+    <ul className={clsx(className, "flex gap-2")}>
       {techs.map((tech) => {
         if (!techList[tech]) return;
 
@@ -45,7 +50,7 @@ export default function TechIcons({ className, techs }: TechIconsProps) {
         return (
           <li
             key={current.name}
-            className='text-xl text-gray-700 dark:text-gray-200'
+            className="text-xl text-gray-700 dark:text-gray-200"
           >
             <current.icon />
           </li>
@@ -58,106 +63,127 @@ export default function TechIcons({ className, techs }: TechIconsProps) {
 const techList = {
   react: {
     icon: SiReact,
-    name: 'React',
+    name: "React",
   },
   nextjs: {
     icon: SiNextdotjs,
-    name: 'Next.js',
+    name: "Next.js",
   },
   tailwindcss: {
     icon: SiTailwindcss,
-    name: 'Tailwind CSS',
+    name: "Tailwind CSS",
   },
   scss: {
     icon: SiSass,
-    name: 'SCSS',
+    name: "SCSS",
   },
   javascript: {
     icon: SiJavascript,
-    name: 'JavaScript',
+    name: "JavaScript",
   },
   typescript: {
     icon: SiTypescript,
-    name: 'TypeScript',
+    name: "TypeScript",
   },
   nodejs: {
     icon: SiNodedotjs,
-    name: 'Node.js',
+    name: "Node.js",
   },
   firebase: {
     icon: SiFirebase,
-    name: 'Firebase',
+    name: "Firebase",
   },
   mongodb: {
     icon: SiMongodb,
-    name: 'MongoDB',
+    name: "MongoDB",
   },
   swr: {
     icon: IoLogoVercel,
-    name: 'SWR',
+    name: "SWR",
   },
   redux: {
     icon: SiRedux,
-    name: 'Redux',
+    name: "Redux",
   },
   mdx: {
     icon: SiMarkdown,
-    name: 'MDX',
+    name: "MDX",
   },
   prettier: {
     icon: SiPrettier,
-    name: 'Prettier',
+    name: "Prettier",
   },
   analytics: {
     icon: SiGoogleanalytics,
-    name: 'Google Analytics',
+    name: "Google Analytics",
   },
   git: {
     icon: SiGit,
-    name: 'Git',
+    name: "Git",
   },
   notion: {
     icon: SiNotion,
-    name: 'Notion API',
+    name: "Notion API",
   },
   swift: {
     icon: SiSwift,
-    name: 'Swift',
+    name: "Swift",
   },
   express: {
     icon: SiExpress,
-    name: 'Express',
+    name: "Express",
   },
   flutter: {
     icon: SiFlutter,
-    name: 'Flutter',
+    name: "Flutter",
   },
   blockchain: {
     icon: SiEthereum,
-    name: 'Blockchain',
+    name: "Blockchain",
   },
   hardhat: {
     icon: FaHardHat,
-    name: 'Hardhat',
+    name: "Hardhat",
   },
   nestjs: {
     icon: SiNestjs,
-    name: 'NestJS',
+    name: "NestJS",
   },
   prisma: {
     icon: SiPrisma,
-    name: 'Prisma',
+    name: "Prisma",
   },
   postgresql: {
     icon: SiPostgresql,
-    name: 'PostgreSQL',
+    name: "PostgreSQL",
   },
   docker: {
     icon: SiDocker,
-    name: 'Docker',
+    name: "Docker",
   },
   swagger: {
     icon: SiSwagger,
-    name: 'Swagger',
+    name: "Swagger",
   },
+  golang: {
+    icon: FaGolang,
+    name: "Golang",
+  },
+  p2p: {
+    icon: RiP2PFill,
+    name: "peer-to-peer",
+  },
+  python: {
+    icon: FaPython,
+    name: "python",
+  },
+  terminal: {
+    icon: FaTerminal,
+    name: "terminal",
+  },
+  django: {
+    icon: SiDjango,
+    name: "Django",
+  },
+  
 };

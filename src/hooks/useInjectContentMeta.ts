@@ -26,13 +26,13 @@ export default function useInjectContentMeta<T extends ContentType>(
 
 const featuredProjects: Array<ProjectFrontmatter> = [
   {
-    slug: "humantd",
-    title: "HumanTD",
-    publishedAt: "2021-01-01",
+    slug: "sietch",
+    title: "Sietch Vault",
+    publishedAt: "2025-03-15",
     description:
-      "Portal that tracks down a person of interest by using backtracking and video footage from CCTV cameras.",
-    techs: "react,tailwindcss,typescript",
-    banner: "nilaysharan/project/humantd/qwlr8aaqfn7xwb1dazqr",
+      "A decentralized file system that allows you to securely sync encrypted data across machines in low or no-internet conditions",
+    techs: "golang,p2p,git",
+    banner: "nilaysharan/project/sietch/ssh6bhhcfbhmu8gqhotm",
   },
   {
     slug: "medbud",
@@ -44,11 +44,11 @@ const featuredProjects: Array<ProjectFrontmatter> = [
     banner: "nilaysharan/project/medbud/banner",
   },
   {
-    slug: "echoes",
-    title: "Echoes",
-    publishedAt: "2021-01-01",
+    slug: "voidcast",
+    title: "Void Cast",
+    publishedAt: "2025-05-05",
     description:
-      "Terminal based interface that assists users to select templates for codes and React components.",
+      "A Threat simulation toolkit that lets you deploy deceptive endpoints to observe suspicious behavior in real time.",
     techs: "git,typescript",
     banner: "nilaysharan/project/echoes/banner",
   },
@@ -56,6 +56,33 @@ const featuredProjects: Array<ProjectFrontmatter> = [
 
 export const allProjects: Array<ProjectFrontmatter> = [
   {
+    slug: "sietch",
+    title: "Sietch Vault",
+    publishedAt: "2025-03-15",
+    description:
+      "A decentralized file system that allows you to securely sync encrypted data across machines in low or no-internet conditions",
+    techs: "golang,p2p,git,terminal",
+    banner: "nilaysharan/project/sietch/ssh6bhhcfbhmu8gqhotm",
+  },
+  {
+    slug: "voidcast",
+    title: "Void Cast",
+    publishedAt: "2025-05-05",
+    description:
+      "A Threat simulation toolkit that lets you deploy deceptive endpoints to observe suspicious behavior in real time.",
+    techs: "git,python,terminal",
+    banner: "nilaysharan/project/echoes/banner",
+  },
+  {
+    slug: "cda",
+    title: "CDA",
+    publishedAt: "2021-01-01",
+    description:
+      "A cli tool to automate the process of verifying data integrity during disaster recovery drills in Ceph storage clusters.",
+    techs: "golang,terminal,git",
+    banner: "nilaysharan/project/humantd/qwlr8aaqfn7xwb1dazqr",
+  },
+  {
     slug: "humantd",
     title: "HumanTD",
     publishedAt: "2021-01-01",
@@ -74,31 +101,30 @@ export const allProjects: Array<ProjectFrontmatter> = [
     banner: "nilaysharan/project/medbud/banner",
   },
   {
-    slug: "echoes",
-    title: "Echoes",
-    publishedAt: "2021-01-01",
-    description:
-      "Terminal based interface that assists users to select templates for codes and React components.",
-    techs: "git,typescript",
-    banner: "nilaysharan/project/echoes/banner",
-  },
-  {
-    slug: "hestia",
-    title: "Hestia",
+    slug: "maintenance-app",
+    title: "VIT Maintenance App",
     publishedAt: "2021-02-12",
-    description: "A web3 based Community Management WebApp.",
-    techs: "ethereum,hardhat,typescript",
-    banner: "nilaysharan/project/hestia/banner",
-  },
-  {
-    slug: "social-media-backend",
-    title: "Social Media Backend",
-    publishedAt: "2021-02-12",
-    description:
-      "A Social Media Backend created with a functioning auth and tweet system.",
-    techs: "nestjs,postgresql,docker,typescript,swagger",
+    description: "A maintenance application created in collaboration with the Mens Hostel.",
+    techs: "nestjs,postgresql,docker,flutter,swagger",
     banner: "nilaysharan/project/socialmediabackend/image",
   },
+  {
+    slug: "period-tracker",
+    title: "Women Health Tracker",
+    publishedAt: "2021-02-12",
+    description: "A backend system for a period tracking application.",
+    techs: "django,postgresql,docker",
+    banner: "nilaysharan/project/socialmediabackend/image",
+  },
+  {
+    slug: "avail",
+    title: "AvailxReverseProxy",
+    publishedAt: "2021-01-01",
+    description:
+      "Sets up Avail Client and configures Nginx as a reverse proxy for the Avail Client's RPC.",
+    techs: "react,tailwindcss,typescript",
+    banner: "nilaysharan/project/humantd/qwlr8aaqfn7xwb1dazqr",
+  }
 ];
 
 export const allBlogs: Array<BlogFrontmatter> = [
