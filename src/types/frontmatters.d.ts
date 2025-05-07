@@ -54,6 +54,7 @@ export type ProjectFrontmatter = {
   link?: string;
   github?: string;
   youtube?: string;
+  externalUrl?: string; // Optional external URL
 };
 
 export type ProjectType = {

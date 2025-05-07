@@ -15,6 +15,7 @@ import ButtonLink from "@/components/links/ButtonLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 
 import { BlogFrontmatter, ProjectFrontmatter } from "@/types/frontmatters";
+import router from "next/router";
 
 /**
  * SVGR Support
@@ -158,6 +159,16 @@ export default function HomePage() {
                   key={project.slug}
                   project={project as ProjectFrontmatter}
                   className={clsx(i > 2 && "hidden sm:block")}
+                  onClick={() => {
+                    const projectData = project as ProjectFrontmatter;
+                    // If external URL exists, use direct link
+                    if (projectData.externalUrl && typeof projectData.externalUrl === 'string') {
+                      window.location.href = projectData.externalUrl;
+                    } else {
+                      // Navigate to the project's internal page
+                      router.push(`/projects/${project.slug}`);
+                    }
+                  }}  
                 />
               ))}
             </ul>

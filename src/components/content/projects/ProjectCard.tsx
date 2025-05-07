@@ -7,11 +7,17 @@ import TechIcons, { TechListType } from '@/components/TechIcons';
 
 import { ProjectFrontmatter } from '@/types/frontmatters';
 
-type ProjectCardProps = {
-  project: ProjectFrontmatter;
-} & React.ComponentPropsWithoutRef<'li'>;
+interface ProjectCardProps {
+  project: ProjectFrontmatter & { externalUrl?: string };
+  className?: string;
+  onClick?: () => void;
+}
 
-export default function ProjectCard({ project, className }: ProjectCardProps) {
+export default function ProjectCard({ 
+  project, 
+  className, 
+  onClick 
+}: ProjectCardProps) {
   return (
     <li
       className={clsx(
@@ -23,6 +29,7 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
         'animate-shadow',
         className
       )}
+      onClick={onClick}
     >
       <UnstyledLink
         href={`/projects/${project.slug}`}

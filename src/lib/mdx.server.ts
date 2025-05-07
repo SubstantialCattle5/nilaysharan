@@ -182,6 +182,7 @@ export function preFetch({ type }: { type: ContentType }) {
       "medbud.mdx",
       "echoes.mdx",
       "social-media-backend.mdx",
+      "sietch.mdx"
     ];
 
     const projects = projectFiles.map((file) => ({

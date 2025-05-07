@@ -1,8 +1,9 @@
 import {
   BlogFrontmatter,
   ContentType,
-  ProjectFrontmatter,
+  ProjectFrontmatter
 } from "@/types/frontmatters";
+
 
 export default function useInjectContentMeta<T extends ContentType>(
   type: T,
@@ -33,6 +34,7 @@ const featuredProjects: Array<ProjectFrontmatter> = [
       "A decentralized file system that allows you to securely sync encrypted data across machines in low or no-internet conditions",
     techs: "golang,p2p,git",
     banner: "nilaysharan/project/sietch/ssh6bhhcfbhmu8gqhotm",
+    externalUrl: "https://sietch.nilaysharan.com"
   },
   {
     slug: "medbud",
@@ -63,6 +65,7 @@ export const allProjects: Array<ProjectFrontmatter> = [
       "A decentralized file system that allows you to securely sync encrypted data across machines in low or no-internet conditions",
     techs: "golang,p2p,git,terminal",
     banner: "nilaysharan/project/sietch/ssh6bhhcfbhmu8gqhotm",
+    externalUrl: "https://sietch.nilaysharan.com"
   },
   {
     slug: "voidcast",
@@ -144,7 +147,7 @@ export const allBlogs: Array<BlogFrontmatter> = [
     readingTime: 8,
     slug: "deep-dive-on-the-madcap-laughs-by-syd-barrett",
     title:
-      "The Madcap Laughs: An Analysis of Syd Barrett’s Musical Genius and Madness",
+      "The Madcap Laughs: An Analysis of Syd Barrett's Musical Genius and Madness",
     description:
       "The Madcap Laughs: A psychedelic journey into the mind of Syd Barrett, the founding member of Pink Floyd.",
     banner: "nilaysharan/blog/syd/banner",
