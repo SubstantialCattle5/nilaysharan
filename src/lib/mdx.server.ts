@@ -191,6 +191,9 @@ export function preFetch({ type }: { type: ContentType }) {
     }));
 
     return projects;
+  } else if (type === "writeups") {
+    // Writeups are now fetched from GitHub API, not local files
+    return [];
   }
 
   return [];

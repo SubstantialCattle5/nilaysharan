@@ -83,5 +83,6 @@ const links = [
   { href: '/', label: 'Home' },
   { href: '/archive', label: 'Archives' },
   { href: '/projects', label: 'Projects' },
+  { href: '/writeups', label: 'Writeups' },
   { href: '/about', label: 'About' },
 ];

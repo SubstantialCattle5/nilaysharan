@@ -58,3 +58,11 @@ export const feedbackFlag =
  */
 export const blockDomainMeta =
   isProd || process.env.NEXT_PUBLIC_META_BLOCK_DOMAIN === 'true';
+
+/**
+ * GitHub Personal Access Token for API requests
+ * Generate at: https://github.com/settings/tokens
+ * Permissions needed: Contents (read) for public repositories
+ * @see github.ts
+ */
+export const githubToken = process.env.GITHUB_TOKEN;

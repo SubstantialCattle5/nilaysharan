@@ -14,12 +14,14 @@ export type BlogFrontmatter = {
   repost?: string;
 };
 
-export type ContentType = 'blog' | 'library' | 'projects' | 'archive';
+export type ContentType = 'blog' | 'library' | 'projects' | 'archive' | 'writeups';
 
 export type PickFrontmatter<T extends ContentType> = T extends 'blog'
   ? BlogFrontmatter
   : T extends 'library'
   ? LibraryFrontmatter
+  : T extends 'writeups'
+  ? WriteupFrontmatter
   : ProjectFrontmatter;
 
 export type InjectedMeta = { views?: number; likes?: number };
@@ -62,6 +64,26 @@ export type ProjectType = {
   frontmatter: ProjectFrontmatter;
 };
 
-export type FrontmatterWithTags = BlogFrontmatter | LibraryFrontmatter;
-export type FrontmatterWithDate = BlogFrontmatter | ProjectFrontmatter;
-export type Frontmatter = ProjectFrontmatter | BlogFrontmatter;
+export type WriteupFrontmatter = {
+  wordCount: number;
+  readingTime: ReadTimeResults;
+  slug: string;
+  title: string;
+  description: string;
+  banner?: string;
+  publishedAt: string;
+  lastUpdated?: string;
+  tags: string;
+  difficulty?: 'Easy' | 'Medium' | 'Hard';
+  category?: string;
+  platform?: string;
+};
+
+export type WriteupType = {
+  code: string;
+  frontmatter: WriteupFrontmatter;
+};
+
+export type FrontmatterWithTags = BlogFrontmatter | LibraryFrontmatter | WriteupFrontmatter;
+export type FrontmatterWithDate = BlogFrontmatter | ProjectFrontmatter | WriteupFrontmatter;
+export type Frontmatter = ProjectFrontmatter | BlogFrontmatter | WriteupFrontmatter;
