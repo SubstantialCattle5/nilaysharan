@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import Typewriter from 'typewriter-effect';
+import TypewriterClient from '@/components/TypewriterClient';
 
 import BlogPage from '@/components/content/blogs/BlogPage';
 
@@ -33,7 +33,7 @@ export default function PostPage() {
   if (!data) {
     return (
       <h1>
-        <Typewriter
+        <TypewriterClient
           options={{
             strings: ['Loading.....'],
             autoStart: true,

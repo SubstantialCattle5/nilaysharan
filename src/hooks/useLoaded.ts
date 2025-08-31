@@ -5,16 +5,26 @@ import { usePreloadState } from '@/context/PreloadContext';
 export default function useLoaded() {
   const preloaded = usePreloadState();
   const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+  const [isMounted, setIsMounted] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isMounted) return;
+    
     if (preloaded) {
       setIsLoaded(true);
     } else {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setIsLoaded(true);
       }, 200);
+      
+      return () => clearTimeout(timer);
     }
-  }, [preloaded]);
+  }, [preloaded, isMounted]);
 
-  return isLoaded;
+  // Return false during SSR to prevent hydration mismatch
+  return isMounted ? isLoaded : false;
 }

@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
-import Typewriter from 'typewriter-effect';
+import TypewriterClient from '@/components/TypewriterClient';
 
 import ProjectPage from '@/components/content/projects/ProjectPage';
 
@@ -33,7 +33,7 @@ export default function PagePage() {
   if (!data) {
     return (
       <h1>
-        <Typewriter
+        <TypewriterClient
           options={{
             strings: ['Loading.....'],
             autoStart: true,

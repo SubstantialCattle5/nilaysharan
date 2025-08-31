@@ -3,7 +3,7 @@ import clsx from "clsx";
 import * as React from "react";
 import { IoArrowDownOutline, IoNewspaperSharp } from "react-icons/io5";
 import { SiGithub, SiInstagram } from "react-icons/si";
-import Typewriter from "typewriter-effect";
+import TypewriterClient from "@/components/TypewriterClient";
 
 import useInjectContentMeta from "@/hooks/useInjectContentMeta";
 import useLoaded from "@/hooks/useLoaded";
@@ -15,7 +15,7 @@ import ButtonLink from "@/components/links/ButtonLink";
 import UnstyledLink from "@/components/links/UnstyledLink";
 
 import { BlogFrontmatter, ProjectFrontmatter } from "@/types/frontmatters";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 /**
  * SVGR Support
@@ -29,6 +29,7 @@ import router from "next/router";
 
 export default function HomePage() {
   const isLoaded = useLoaded();
+  const router = useRouter();
   const populatedProjects =
     useInjectContentMeta("projects", "featuredProjects") || [];
   const populatedPosts = useInjectContentMeta("archive", "featuredBlogs") || [];
@@ -43,7 +44,7 @@ export default function HomePage() {
         >
           <article className="layout">
             <h2 className="text-2xl md:text-4xl 2xl:text-5xl" data-fade="1">
-              <Typewriter
+              <TypewriterClient
                 options={{
                   strings: [
                     "Hello!",
@@ -150,7 +151,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
               Below are some of my favorite projects over the years, a few of
-              which have been featured in Yantra, Social Transformers, Devsoc
+              which have been featured in Google Connect, Social Transformers, Devsoc
               and more.
             </p>
             <ul className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -163,7 +164,7 @@ export default function HomePage() {
                     const projectData = project as ProjectFrontmatter;
                     // If external URL exists, use direct link
                     if (projectData.externalUrl && typeof projectData.externalUrl === 'string') {
-                      window.location.href = projectData.externalUrl;
+                      window.open(projectData.externalUrl, '_blank');
                     } else {
                       // Navigate to the project's internal page
                       router.push(`/projects/${project.slug}`);

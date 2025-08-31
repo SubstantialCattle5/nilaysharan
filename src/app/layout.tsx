@@ -45,7 +45,7 @@ export default function RootLayout({
           content="luh5nd1ELZCFHhe7YjWxXZVk55Ctg7h1YvZR1azguBk"
         />
       </head>
-      <body>
+      <body suppressHydrationWarning={true}>
         <ThemeProvider attribute="class" enableSystem={false}>
           <Header />
           <PreloadProvider>

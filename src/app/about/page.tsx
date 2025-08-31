@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import React from 'react';
-import Typewriter from 'typewriter-effect';
+import TypewriterClient from '@/components/TypewriterClient';
 
 import useLoaded from '@/hooks/useLoaded';
 
@@ -18,7 +18,7 @@ const Page = () => {
         <section className={clsx(isLoaded && 'fade-in-start')}>
           <div className='layout min-h-main py-20'>
             <h2 data-fade='0'>
-              <Typewriter
+              <TypewriterClient
                 options={{
                   strings: [
                     'About',
