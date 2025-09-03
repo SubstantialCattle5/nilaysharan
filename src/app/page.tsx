@@ -95,7 +95,7 @@ export default function HomePage() {
               className="mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8"
             >
               <UnstyledLink
-                href="https://drive.google.com/file/d/1ZuCOhavAZ96aWOMxCCOpf5arUuKJetWg/view"
+                href="https://drive.google.com/file/d/10hntY_jTg4Vh-ba08eV6YipO4bgnXhn_/view?usp=sharing"
                 className={clsx(
                   "inline-flex items-center gap-1 text-sm font-medium md:text-base",
                   "text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white",
@@ -107,7 +107,7 @@ export default function HomePage() {
                 <span>Resume</span>
               </UnstyledLink>
               <UnstyledLink
-                href="https://www.instagram.com/nilay.sharan/"
+                href="https://www.instagram.com/substantialcattle/"
                 className={clsx(
                   "inline-flex items-center gap-1 text-sm font-medium md:text-base",
                   "group text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white",
