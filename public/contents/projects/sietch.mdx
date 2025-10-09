@@ -10,7 +10,7 @@ github: "github.com/nilaysharan/sietch"
 
 > ## Introduction
 
-I’ve long been unsettled by the fragility of our reliance on the “cloud.” 
+I’ve long been unsettled by the fragility of our reliance on the **cloud.**
 In many parts of the world, connectivity is erratic, censorship is real, and surveillance never sleeps.
 Every time the internet falters or a service goes down, your data—and your trust—becomes hostage to infrastructure you don’t control.
 
@@ -20,21 +20,25 @@ Whether you’re in a remote village, under heavy surveillance, or simply distru
 
 I led the architecture and implementation of its core components:
 
-- Encrypted chunking and deduplication, so that overlapping content isn’t duplicated and bandwidth is used smartly
+- **Encrypted chunking** and **deduplication**, so that overlapping content isn’t duplicated and bandwidth is used smartly
 
-- Zero-trust design ensuring keys never leave your control, metadata is minimized, and no central authority ever sees your data
+- **Zero-trust design** ensuring keys never leave your control, metadata is minimized, and no central authority ever sees your data
 
-- Discovery and synchronization over local networks, mesh, or even sneakernet — so connections aren’t a prerequisite
+- Discovery and synchronization over local **networks**, **mesh**, or even **sneakernet** — so connections aren’t a prerequisite
 
-- A CLI-first, scriptable UX giving power users the flexibility to automate, integrate, and inspect internals
+- A CLI-first, scriptable UX giving power users the flexibility to **automate**, **integrate**, and **inspect internals**
 
 In building Sietch, I wrestled with deep trade-offs between security and usability, designed for adversarial environments, 
 and modularized the system so advanced users can replace components (discovery, encryption, UI) easily
 
-If you care about sovereignty, resilience, and protecting your data in the worst of times, I invite you to explore Sietch: try it, critique it, and help evolve it.
+If you care about **sovereignty**, **resilience**, and **protecting** your data in the worst of times, I invite you to explore Sietch: try it, critique it, and help evolve it.
 
+
+The website for Sietch, where you can find the documentation, installation, and deep-dive into Sietch architecture.
+<WebsiteCard url='https://sietch.nilaysharan.com' title='Visit Sietch Website' description='Docs, installation, and deep-dive into Sietch architecture.' />
+
+The Github repository for Sietch, where you can find the code, issues, and pull requests.
 <GithubCard repo='substantialcattle5/sietch' />
-
 
 
 > ## Technical Details
@@ -45,20 +49,20 @@ are always protected.
 
 > ### Core Features 
 
-- AES256/GPG/Chacha20 encryption - Encryption is used to ensure the data is protected from unauthorized access.
-- Chunked data - Data is chunked into smaller pieces to reduce the size of the data and to make it easier to sync.
-- Deduplication - Deduplication is used to reduce the size of the data and to make it easier to sync.
-- Sneakernet synchronization - Special configuration provided to sync over USB drives or even sneakernet.
-- P2P synchronization - Synchronization is done using a p2p protocol to find other nodes in the network.
-- Gossip Discovery - Discovery is done using a gossip protocol to find other nodes in the network.
-- CLI-first, scriptable UX - The CLI is used to interact with the system and to automate the system.
+- **AES256/GPG/Chacha20 encryption** - Encryption is used to ensure the data is protected from unauthorized access.
+- **Chunked data** - Data is chunked into smaller pieces to reduce the size of the data and to make it easier to sync.
+- **Deduplication** - Deduplication is used to reduce the size of the data and to make it easier to sync.
+- **Sneakernet synchronization** - Special configuration provided to sync over USB drives or even sneakernet.
+- **P2P synchronization** - Synchronization is done using a p2p protocol to find other nodes in the network.
+- **Gossip Discovery** - Discovery is done using a gossip protocol to find other nodes in the network.
+- **CLI-first, scriptable UX** - The CLI is used to interact with the system and to automate the system.
 
 >### Tech Stack Used
 
-- Golang - Used to write the code for the project.
-- P2P - protocols inspired from librsync and librsync-lite.
-- Github Actions - Created a CI/CD pipeline to automatically verify the code, find out ai-assited contributions and build/publish the project.
-- Homebrew - Created a homebrew formula to host the project.
+- **Golang** - Used to write the code for the project.
+- **P2P** - protocols inspired from librsync and librsync-lite.
+- **Github Actions** - Created a CI/CD pipeline to automatically verify the code, find out ai-assited contributions and build/publish the project.
+- **Homebrew** - Created a homebrew formula to host the project.
 
 
 >### Usage Examples 
@@ -80,3 +84,4 @@ are always protected.
 
 
 For more examples, and a better technical deep-dive, please refer to the [documentation](https://sietch.nilaysharan.com/).
+

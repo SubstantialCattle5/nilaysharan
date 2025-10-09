@@ -7,6 +7,7 @@ import SplitImage, { Split } from '@/components/content/SplitImage';
 import CloudinaryImg from '@/components/images/CloudinaryImg';
 import CustomLink from '@/components/links/CustomLink';
 import TechIcons from '@/components/TechIcons';
+import WebsiteCard from '@/components/content/card/WebsiteCard';
 const MDXComponents = {
   a: CustomLink,
   Image,
@@ -17,6 +18,7 @@ const MDXComponents = {
   Split,
   TechIcons,
   GithubCard,
+  WebsiteCard,
 };
 
 export default MDXComponents;
