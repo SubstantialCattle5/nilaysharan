@@ -161,14 +161,7 @@ export default function HomePage() {
                   project={project as ProjectFrontmatter}
                   className={clsx(i > 2 && "hidden sm:block")}
                   onClick={() => {
-                    const projectData = project as ProjectFrontmatter;
-                    // If external URL exists, use direct link
-                    if (projectData.externalUrl && typeof projectData.externalUrl === 'string') {
-                      window.open(projectData.externalUrl, '_blank');
-                    } else {
-                      // Navigate to the project's internal page
-                      router.push(`/projects/${project.slug}`);
-                    }
+                    router.push(`/projects/${project.slug}`);
                   }}  
                 />
               ))}

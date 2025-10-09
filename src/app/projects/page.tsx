@@ -40,14 +40,7 @@ const Page = () => {
                   key={project.slug}
                   project={project}
                   onClick={() => {
-                    // If external URL exists, use direct link
-                    if (project.externalUrl) {
-                      router.push(project.externalUrl);
-                    } else {
-                      // Navigate to the project's internal page
-                      router.push(`/projects/${project.slug}`);
-                    }
-                  }}
+                    router.push(`/projects/${project.slug}`);}} 
                 />
               ))}
             </ul>

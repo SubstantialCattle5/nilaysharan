@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { bundleMDX } from 'mdx-bundler';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { getWriteupBySlug } from '@/lib/github';
 
 export async function GET(req: NextRequest) {
@@ -33,6 +35,20 @@ export async function GET(req: NextRequest) {
     // Bundle the markdown content with MDX
     const { code } = await bundleMDX({
       source: writeup.content,
+      mdxOptions(options) {
+        options.rehypePlugins = [
+          ...(options.rehypePlugins ?? []),
+          rehypeSlug,
+          [
+            rehypeAutolinkHeadings,
+            {
+              behavior: 'append',
+              properties: { className: ['hash-anchor'] },
+            },
+          ],
+        ];
+        return options;
+      },
     });
 
     if (!code) {

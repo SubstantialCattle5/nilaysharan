@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
 import { join } from "path";
 import readingTime from "reading-time";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import {
   ContentType,
@@ -38,6 +40,20 @@ export async function getFileBySlug(
 ): Promise<{ code: string; frontmatter: Frontmatter }> {
   const { code, frontmatter } = await bundleMDX({
     source,
+    mdxOptions(options) {
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: "append",
+            properties: { className: ["hash-anchor"] },
+          },
+        ],
+      ];
+      return options;
+    },
   });
 
   return {

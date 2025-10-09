@@ -8,236 +8,75 @@ tags: "react,tailwindcss,typescript"
 github: "github.com/nilaysharan/sietch"
 ---
 
-As a developer deeply concerned about digital privacy, I’ve always been uncomfortable with the idea that most of our data lives on centralized servers—owned, accessed, and sometimes breached by third parties. Cloud storage may be convenient, but it’s also a **single point of failure**. This problem becomes even more serious for people in high-risk environments: journalists under surveillance, security professionals managing sensitive credentials, or users in regions with unstable internet.
+> ## Introduction
 
-That’s why I built **Sietch**—a decentralized, offline-first vault system designed to _securely sync data across devices without relying on cloud infrastructure_. Inspired by zero-trust principles and built with strong cryptography at its core, Sietch gives you **complete ownership and control** over your data.
+I’ve long been unsettled by the fragility of our reliance on the “cloud.” 
+In many parts of the world, connectivity is erratic, censorship is real, and surveillance never sleeps.
+Every time the internet falters or a service goes down, your data—and your trust—becomes hostage to infrastructure you don’t control.
 
-Unlike typical sync tools, Sietch:
+Out of that uneasy truth, Sietch was born. A system engineered to survive when everything else fails. 
+It syncs peer-to-peer, resists metadata leaks, and stays operable in blackout zones or disconnected regions. 
+Whether you’re in a remote village, under heavy surveillance, or simply distrustful of centralized services, Sietch gives you back control.
 
-- Implements **end-to-end encryption** by default
-- Uses **content-defined chunking** to reduce redundancy
-- Ensures **data integrity with Merkle trees**
-- Operates **peer-to-peer**, with optional offline syncing
-- Doesn’t assume your network or environment is ever secure
+I led the architecture and implementation of its core components:
 
-This blog post is a deep dive into how Sietch works under the hood. From encryption design to peer discovery, everything has been engineered for resilience, privacy, and control.
+- Encrypted chunking and deduplication, so that overlapping content isn’t duplicated and bandwidth is used smartly
 
-## Table of Contents
+- Zero-trust design ensuring keys never leave your control, metadata is minimized, and no central authority ever sees your data
 
-1. **Zero-Trust Architecture**
+- Discovery and synchronization over local networks, mesh, or even sneakernet — so connections aren’t a prerequisite
 
-   - Principles and Implementation
-   - Trust Boundaries and Security Zones
-   - Authentication and Authorization Framework
-   - Threat Modeling Approach
+- A CLI-first, scriptable UX giving power users the flexibility to automate, integrate, and inspect internals
 
-2. **End-to-End Encryption Methodology**
+In building Sietch, I wrestled with deep trade-offs between security and usability, designed for adversarial environments, 
+and modularized the system so advanced users can replace components (discovery, encryption, UI) easily
 
-   - AES-256-GCM Implementation Details
-   - GPG Integration for Key Management
-   - Key Distribution Mechanisms
-   - Cryptographic Primitives and Libraries
+If you care about sovereignty, resilience, and protecting your data in the worst of times, I invite you to explore Sietch: try it, critique it, and help evolve it.
 
-3. **Data Chunking and Deduplication**
+<GithubCard repo='substantialcattle5/sietch' />
 
-   - Content-Defined Chunking Algorithm
-   - Variable vs. Fixed Chunk Sizes
-   - Deduplication Strategy and Efficiency
-   - Storage Optimization Techniques
 
-4. **Merkle Tree Implementation**
 
-   - Tree Structure and Properties
-   - Integrity Verification Process
-   - Synchronization Efficiency
-   - Conflict Detection and Resolution
+> ## Technical Details
 
-5. **Storage Format Specifications**
+Sietch creates self-contained encrypted vaults that can sync over LAN, sneakernet (USB drives), or weak WiFi networks. 
+It operates fully offline, using chunked data, encryption, and peer-to-peer protocols to ensure your files 
+are always protected.
 
-   - Document Structure and Encoding
-   - Metadata Management
-   - Cross-Platform Compatibility
-   - Performance Considerations
+> ### Core Features 
 
-6. **Network Architecture**
+- AES256/GPG/Chacha20 encryption - Encryption is used to ensure the data is protected from unauthorized access.
+- Chunked data - Data is chunked into smaller pieces to reduce the size of the data and to make it easier to sync.
+- Deduplication - Deduplication is used to reduce the size of the data and to make it easier to sync.
+- Sneakernet synchronization - Special configuration provided to sync over USB drives or even sneakernet.
+- P2P synchronization - Synchronization is done using a p2p protocol to find other nodes in the network.
+- Gossip Discovery - Discovery is done using a gossip protocol to find other nodes in the network.
+- CLI-first, scriptable UX - The CLI is used to interact with the system and to automate the system.
 
-   - Gossip Protocol Implementation
-   - Peer Discovery Mechanisms
-   - Transport Layer Options
-   - Offline Operation Capabilities
+>### Tech Stack Used
 
-7. **Getting Started with Sietch**
-   - Installation and Configuration
-   - Basic Usage Patterns
-   - Advanced Features
-   - Integration Examples
+- Golang - Used to write the code for the project.
+- P2P - protocols inspired from librsync and librsync-lite.
+- Github Actions - Created a CI/CD pipeline to automatically verify the code, find out ai-assited contributions and build/publish the project.
+- Homebrew - Created a homebrew formula to host the project.
 
-## Zero-Trust Architecture
 
-Sietch is built from the ground up on a **Zero-Trust Architecture (ZTA)**—a security philosophy that assumes no component, user, or device can be inherently trusted, even if it's inside the network perimeter.
-In the context of decentralized systems, this approach is not just ideal; it's essential.
+>### Usage Examples 
 
-### Principles and Implementation
+- Scaffold a vault - `sietch scaffold --template <template-name> --name <vault-name>`
+<Image src='/images/sietch_integration.png' alt='create-vault' width={1000} height={1000} />
 
-The core principles of Zero-Trust implemented in Sietch include:
+- Add files or directories to a vault - `sietch add <file-or-directory-path> --vault <vault-name>`
+<Image src='/images/sietch_add.png' alt='create-vault' width={1000} height={1000} />
 
-- **Never trust, always verify:** All nodes and clients must mutually authenticate before communication.
-- **Least privilege access:** Every operation is gated by strict cryptographic authorization tied to granular scopes (e.g., device-specific or time-limited capabilities).
-- **Assume breach:** Internal components are sandboxed, with signed message boundaries and robust validation to mitigate the blast radius of any compromise.
+- List all files in a vault and sort them by size - `sietch ls --long --sort size`
+<Image src='/images/sietch_ls.png' alt='create-vault' width={1000} height={1000} />
 
-**Implementation Highlights:**
+- Deduplication Status - `sietch dedup status`
+<Image src='/images/sietch_dedup.png' alt='create-vault' width={1000} height={1000} />
 
-- Every piece of data is **encrypted client-side** before it leaves the local environment.
-- Devices are treated as first-class entities, each with their own public/private key pairs.
-- Requests, data exchanges, and sync operations are validated using **digital signatures**—nothing is implicitly trusted.
+- Get files from the vault - `sietch get <file-or-directory-path>`
+<Image src='/images/sietch_get.png' alt='create-vault' width={1000} height={1000} />
 
-### Trust Boundaries and Security Zones
 
-Sietch defines **logical trust boundaries** instead of relying on physical network topology:
-
-- **Device Zone:** A local environment isolated by OS-level permissions and private keys.
-- **Peer Zone:** Other verified devices that share a data vault, each authenticated cryptographically.
-- **External/Untrusted Zone:** Any unknown peer, unauthenticated request, or compromised node.
-
-Data never flows between zones without cryptographic guarantees:
-
-- Trust is **not inherited**—every new device must explicitly join a vault via out-of-band key provisioning.
-- All inter-zone communication is end-to-end encrypted and signed.
-
-### Authentication and Authorization Framework
-
-Sietch uses a **hybrid authentication system** that combines public-key cryptography with ephemeral session keys:
-
-- **Authentication**:
-
-  - Devices exchange signed identity tokens to prove possession of their private keys.
-  - Optional user authentication can be layered via passphrases unlock of local vaults.
-
-- **Authorization**:
-  - Vault access policies are defined using **capability-based access control (CapBAC)**.
-  - Each action (e.g., sync, decrypt, modify) is associated with a signed capability token scoped to a device or session. (yet to be implemented)
-
-This structure enables **fine-grained control** without maintaining a centralized access control list or requiring a live server.
-
-### Threat Modeling Approach
-
-Before writing any code, Sietch’s architecture was evaluated through a formal threat model. Some key attack vectors and mitigations include:
-
-1. Man-in-the-middle (MitM) attacks ->  Mutual TLS + key pinning using device fingerprints 
-2. Data exfiltration via rogue devices -> CapBAC limits scope; revoked devices lose sync access
-3. Vault corruption from compromised peer -> Merkle tree validation + version history rollback
-4. Replay attacks -> Nonces and timestamped tokens prevent reuse
-
-By treating every component as potentially compromised and limiting trust to only what can be cryptographically proven, Sietch ensures security even under adverse conditions—**no VPNs, no firewalls, no assumptions**.
-
----
-## 2. End-to-End Encryption Methodology
-
-Sietch is fundamentally designed with **end-to-end encryption (E2EE)** at its core. Unlike typical client-server encryption models—where data is decrypted on intermediary servers—Sietch ensures that **only the sender and the intended recipient can ever access the plaintext**.
-
-This approach is critical not only for privacy but also for data **portability and autonomy**, especially in offline or adversarial environments.
-
-### AES-256-GCM Implementation Details
-
-At the heart of Sietch's encryption system is **AES-256-GCM**, chosen for its combination of high performance, resistance to side-channel attacks, and built-in authentication (AEAD):
-
-- **Algorithm**: AES-256 in Galois/Counter Mode (GCM)
-- **Key length**: 256-bit symmetric keys
-- **Nonce/IV**: 96-bit randomly generated per message
-- **Authentication tag**: 128-bit, used to ensure data integrity and authenticity
-
-Each chunk of data is encrypted **independently**, meaning even if one part is compromised or lost, the rest remains intact and secure.
-
-### GPG Integration for Key Management
-
-Sietch integrates with **GNU Privacy Guard (GPG)** to manage long-term identity and device keys. This allows users to leverage **existing keyrings**, hardware tokens (like YubiKeys), and smart cards for added security.
-
-Key roles include:
-
-- **Identity Key**: A GPG RSA or ECC keypair that represents the user or device identity
-- **Session Keys**: Randomly generated symmetric keys (AES) used for individual sync sessions
-- **Metadata Keys**: Separate keys to encrypt file names, timestamps, and chunk identifiers
-
-This hybrid approach ensures **strong identity verification (asymmetric)** and **fast data encryption (symmetric)**.
-
-### Key Distribution Mechanisms
-
-In a decentralized environment, secure key distribution is both vital and challenging. Sietch handles this with a **manual trust onboarding process** and **secure peer-to-peer key exchanges**:
-
-- New devices are added to a vault by **importing a signed trust token**—either scanned as a QR code or transferred via encrypted USB.
-- Vault participants periodically rotate session keys and **sign state updates** to validate authenticity.
-
-This avoids the need for a centralized Key Management Service (KMS), while maintaining strong protections against rogue devices.
-
-### Cryptographic Primitives and Libraries
-
-All cryptographic operations in Sietch are backed by **battle-tested, auditable libraries** with memory safety guarantees:
-
-- `libsodium` — For secure random generation, key derivation, and fast AEAD
-- `openpgp.js` / GPG CLI — For identity-based encryption and keyrings
-- `HKDF` — For deriving multiple keys from a shared secret
-- `PBKDF2` (optional) — For passphrase-based vault unlocking, using high iteration counts to deter brute force
-
-Every algorithm choice prioritizes:
-
-- **Forward secrecy** (no one key compromises past or future data)
-- **Tamper-proofing** (integrity checks on every operation)
-- **Offline capability** (no reliance on online trust anchors or PKI)
-
-## 3. Data Chunking and Deduplication
-
-Efficient synchronization in a decentralized system like Sietch requires more than just encryption—it demands **smart data structuring**. To minimize redundant storage and enable quick syncing across peers, Sietch implements an advanced **content-defined chunking** (CDC) system, paired with robust deduplication.
-
-This design ensures that even minimal changes (like editing a single paragraph in a document) result in **tiny diffs**, not full re-uploads—saving both time and bandwidth.
-
-### Content-Defined Chunking Algorithm
-
-Sietch uses **Rabin fingerprinting**, a rolling hash technique, to detect natural content boundaries within files. Instead of breaking data into arbitrary sizes, the algorithm dynamically determines chunk boundaries based on the file's content.
-
-Key benefits:
-
-- **Change-localization**: Only altered chunks are reprocessed during sync.
-- **Resilience to shifting data**: Inserting or deleting bytes at the top of a file doesn’t affect all downstream chunks.
-- **Compression-aware**: Works well even with compressed or binary data.
-
-Parameters used:
-
-- **Min chunk size**: 2 KB  
-- **Avg chunk size**: 8 KB  
-- **Max chunk size**: 16 KB
-
-This range offers a balance between deduplication granularity and hashing overhead.
-
-### Variable vs. Fixed Chunk Sizes
-
-While fixed-size chunking is simpler, it suffers from **boundary shift issues**—a small insertion shifts every subsequent chunk, killing deduplication. That’s why Sietch exclusively uses **variable-size chunks** based on CDC.
-
-Fixed chunks:
-- ✅ Simple
-- ❌ Poor deduplication under edits
-
-Content-defined chunks:
-- ✅ Superior for versioning and diffs
-- ✅ Ideal for collaborative documents and frequent changes
-
-### Deduplication Strategy and Efficiency
-
-Each chunk is uniquely identified by a **SHA-256 hash** of its contents. When syncing, peers compare hashes to detect what chunks are already known and only transfer the missing ones.
-
-This results in:
-
-- **Massive bandwidth savings** on large files with small edits
-- **Storage reduction**, especially across similar files or versions
-- **Improved sync times**, even over slow or intermittent connections
-
-The deduplication table (a local key-value index) tracks chunk hashes and their reference counts to prevent redundant storage.
-
-### Storage Optimization Techniques
-
-To make the most of local disk space, Sietch employs several optimizations:
-
-- **Reference counting**: Chunks are only deleted when no versions reference them.
-- **Chunk compression**: Each chunk is compressed using Zstandard (zstd) before encryption, maximizing storage savings without affecting security.
-- **Garbage collection**: Orphaned or expired chunks are purged periodically to maintain performance.
-
-Together, these techniques allow Sietch to operate efficiently even on **resource-constrained devices**, like single-board computers or mobile phones.
+For more examples, and a better technical deep-dive, please refer to the [documentation](https://sietch.nilaysharan.com/).

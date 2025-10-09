@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from 'clsx';
 import * as React from 'react';
 import { BiGitRepoForked } from 'react-icons/bi';
@@ -27,7 +29,21 @@ type GithubCardProps = {
 
 export default function GithubCard({ repo, className }: GithubCardProps) {
   const { data: repository, error } = useSWR<GithubRepo>(
-    `https://api.github.com/repos/${repo}`
+    `https://api.github.com/repos/${repo}`,
+    async (url: string) => {
+      const res = await fetch(url, {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+          ...(process.env.GITHUB_TOKEN
+            ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+            : {}),
+        },
+      });
+      if (!res.ok) {
+        throw new Error(`Failed to fetch GitHub repo: ${res.status}`);
+      }
+      return res.json();
+    }
   );
 
   return !error && repository ? (
