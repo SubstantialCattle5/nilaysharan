@@ -70,8 +70,8 @@ export const allProjects: Array<ProjectFrontmatter> = [
     slug: "octoguard",
     title: "Octoguard",
     publishedAt: "2022-03-05",
-    description: "Automated GitHub Actions for managing low-effort PRs and AI-assisted contributions",
-    techs: "github-actions,javascript,nodejs,automation",
+    description: "A GitHub Actions designed to help maintainers manage low-effort pull requests events like Hacktoberfest.",
+    techs: 'git,javascript,nodejs,automation',
     banner: "nilaysharan/project/octoguard/bb3",
     github: "github.com/substantialcattle5/octoguard"
   },
@@ -84,15 +84,6 @@ export const allProjects: Array<ProjectFrontmatter> = [
     techs: "golang,p2p,git,terminal",
     banner: "nilaysharan/project/sietch/ssh6bhhcfbhmu8gqhotm",
     externalUrl: "https://sietch.nilaysharan.com"
-  },
-  {
-    slug: "voidcast",
-    title: "Void Cast",
-    publishedAt: "2025-05-05",
-    description:
-      "A Threat simulation toolkit that lets you deploy deceptive endpoints to observe suspicious behavior in real time.",
-    techs: "git,python,terminal",
-    banner: "nilaysharan/project/echoes/banner",
   },
   {
     slug: "cda",
