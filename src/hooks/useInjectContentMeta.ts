@@ -27,15 +27,6 @@ export default function useInjectContentMeta<T extends ContentType>(
 
 const featuredProjects: Array<ProjectFrontmatter> = [
   {
-    slug: "octoguard",
-    title: "Octoguard",
-    publishedAt: "2022-03-05",
-    description: "Automated GitHub Actions for managing low-effort PRs and AI-assisted contributions",
-    techs: "github-actions,javascript,nodejs,automation",
-    banner: "nilaysharan/project/octoguard/bb3",
-    github: "github.com/substantialcattle5/octoguard"
-  },
-  {
     slug: "sietch",
     title: "Sietch Vault",
     publishedAt: "2025-03-15",
