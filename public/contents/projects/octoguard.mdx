@@ -1,0 +1,55 @@
+---
+title: 'Octoguard'
+slug: 'octoguard'
+publishedAt: '2022-03-05'
+description: 'Automated GitHub Actions for managing low-effort PRs and AI-assisted contributions'
+banner: 'nilaysharan/project/octoguard/bb3'
+tags: 'github-actions,javascript,nodejs,automation'
+github: 'github.com/substantialcattle5/octoguard'
+---
+
+<br />
+
+> ## Why Octoguard Exists
+
+Scrolling through memes on Twitter is one thing. Wading through low-effort pull requests is another. As I soon realized, many contributors were copy-pasting AI-generated code, while others were just in it for the Hacktoberfest T-shirt.  
+
+As a solo maintainer, keeping up with this flood was exhausting. My project, **Sietch**, already had a fairly complex GitHub Actions workflow, so I figured why not teach it to spot low-effort and AI-assisted contributions too?  
+
+Soon enough, contributors from Hacktoberfest channels started reaching out - not just to help, but to implement their own ideas for automated detection. One wanted to scan commit messages for AI patterns, another wanted to flag repetitive behavior, and someone even joked about detecting “the ChatGPT vibe.” The project quickly grew beyond a single workflow.  
+
+That’s when I realized, this deserved to be its own thing. Thus, **Octoguard** was born: a GitHub Actions workflow designed to help maintainers automatically detect and manage low-effort and AI-generated PRs.
+
+> ## What It Does
+
+The goal of was simple: save maintainers time while keeping contribution quality high. Its key features include:
+
+- **Low-effort PR Detection**: Flags PRs that seem low-effort by analyzing diff changes.  
+- **AI-Assisted Detection**: Detects potential AI-generated contributions via commit message patterns.  
+- **Automated Triage**: Labels PRs with `needs-justification` or `hacktoberfest-spam` and guides contributors on what to fix.  
+- **Auto-close Policy**: Automatically closes PRs that don’t meet quality standards after a 48-hour grace period.
+
+> ## Tech Stack
+
+Keeping things lightweight:  
+
+- **GitHub Actions**: Workflow automation  
+- **Node.js**: JavaScript runtime  
+- **JavaScript**: Programming language  
+
+> ## How to Use It
+
+Octoguard starts with a simple [PR template](https://github.com/SubstantialCattle5/Octoguard/blob/master/.github/PULL_REQUEST_TEMPLATE.md) to guide contributors:  
+
+<Image src='/images/template_octo.png' alt='PR Template' width={1000} height={1000} />
+
+It ensures the template is properly filled — a simple check, but it cuts down on low-effort PRs where contributors only changed a `.md` file.  
+
+When a PR is flagged, Octoguard provides a **justification message** explaining what needs to be updated:  
+<Image src='/images/justification_octo.png' alt='Justification Message' width={1000} height={1000} />
+
+Finally, PRs that don’t meet standards are automatically closed after the grace period:  
+<Image src='/images/close_octo.png' alt='Auto-close PR' width={1000} height={1000} />
+
+Octoguard is all about helping maintainers spend less time policing PRs and more time improving their projects — and maybe enjoying Hacktoberfest without the chaos.  
+<GithubCard repo='substantialcattle5/octoguard' />

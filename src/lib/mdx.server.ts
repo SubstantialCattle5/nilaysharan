@@ -59,7 +59,7 @@ export async function getFileBySlug(
   return {
     code,
     frontmatter: {
-      wordCount: source.split(/\s+/gu).length,
+      wordCount: source.split(/\s+/).length,
       readingTime: readingTime(source),
       slug: slug as string,
       banner: frontmatter.banner,
@@ -194,6 +194,7 @@ export function preFetch({ type }: { type: ContentType }) {
     return blogs;
   } else if (type === "projects") {
     const projectFiles = [
+      "octoguard.mdx",
       "humantd.mdx",
       "medbud.mdx",
       "echoes.mdx",
