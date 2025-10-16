@@ -45,15 +45,16 @@ const featuredProjects: Array<ProjectFrontmatter> = [
     techs: "express,typescript,prisma,flutter",
     banner: "nilaysharan/project/medbud/banner",
   },
-  {
-    slug: "voidcast",
-    title: "Void Cast",
-    publishedAt: "2025-05-05",
-    description:
-      "A Threat simulation toolkit that lets you deploy deceptive endpoints to observe suspicious behavior in real time.",
-    techs: "git,typescript",
-    banner: "nilaysharan/project/echoes/banner",
+    {
+    slug: "octoguard",
+    title: "Octoguard",
+    publishedAt: "2022-03-05",
+    description: "A GitHub Actions designed to help maintainers manage low-effort pull requests events like Hacktoberfest.",
+    techs: 'git,javascript,nodejs,automation',
+    banner: "nilaysharan/project/octoguard/bb3",
+    github: "github.com/substantialcattle5/octoguard"
   },
+  
 ];
 
 export const allProjects: Array<ProjectFrontmatter> = [
@@ -77,15 +78,6 @@ export const allProjects: Array<ProjectFrontmatter> = [
     externalUrl: "https://sietch.nilaysharan.com"
   },
   {
-    slug: "cda",
-    title: "CDA",
-    publishedAt: "2021-01-01",
-    description:
-      "A cli tool to automate the process of verifying data integrity during disaster recovery drills in Ceph storage clusters.",
-    techs: "golang,terminal,git",
-    banner: "nilaysharan/project/humantd/qwlr8aaqfn7xwb1dazqr",
-  },
-  {
     slug: "humantd",
     title: "HumanTD",
     publishedAt: "2021-01-01",
@@ -102,14 +94,6 @@ export const allProjects: Array<ProjectFrontmatter> = [
       "Service that offers text-based management for hospitals and their patients features a chatbot",
     techs: "express,typescript,prisma,flutter",
     banner: "nilaysharan/project/medbud/banner",
-  },
-  {
-    slug: "maintenance-app",
-    title: "VIT Maintenance App",
-    publishedAt: "2021-02-12",
-    description: "A maintenance application created in collaboration with the Mens Hostel.",
-    techs: "nestjs,postgresql,docker,flutter,swagger",
-    banner: "nilaysharan/project/socialmediabackend/image",
   },
   {
     slug: "period-tracker",
