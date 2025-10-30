@@ -1,0 +1,323 @@
+# Building a Domain Security Analysis Pipeline in Go
+
+**Analyzing 2,000+ domains for security posture, ownership, and threat signals at scale**
+
+When you extract domains from a browser extension, mail server logs, or network traffic, you're left with a massive list of FQDNs and hostnames. But raw domain lists tell you nothing about *risk*—which domains lack email authentication, expose internal infrastructure through misconfigured DNS, or belong to known tracker networks. This post walks through designing and implementing a production-grade domain security analysis tool in Go that normalizes, enriches, and scores thousands of domains using DNS, RDAP, Certificate Transparency, and threat intelligence feeds.[1][2][3][4][5][6][7][8]
+
+***
+
+## Why Go for Domain Security Analysis?
+
+Go excels at network-heavy, concurrent workloads—exactly what you need when querying DNS servers, RDAP endpoints, and passive DNS APIs for thousands of domains. Key advantages include:[9][10]
+
+**Concurrency at scale:** Goroutines and channels let you resolve DNS records, check DNSSEC, test zone transfers, and query RDAP for hundreds of domains simultaneously without complex thread management.[10]
+
+**Rich networking libraries:** The standard library includes `net` for DNS resolution, `net/http` for API calls, and `crypto/tls` for certificate parsing—core primitives for infrastructure mapping and TLS analysis.[10]
+
+**Single-binary deployment:** Compile once and run anywhere, making it ideal for CI/CD pipelines, serverless functions, or containerized security scanners.[11]
+
+**Security focus:** Memory safety, strong typing, and secure defaults reduce the attack surface of your analysis tooling itself.[11][10]
+
+Real-world projects like `domain_analyzer` demonstrate Go's fitness for DNS security assessment, WHOIS/RDAP lookups, and domain reputation checking at scale.[12][9]
+
+***
+
+## Architecture Overview
+
+The pipeline follows a staged ETL (Extract, Transform, Load) model:
+
+1. **Normalization:** Convert raw input to lowercase, Punycode, and extract the eTLD+1 (registered domain) using the Public Suffix List to correctly identify organizational boundaries for multi-label TLDs like `.co.uk`.[8][13]
+
+2. **DNS & Infrastructure Enrichment:** Resolve A/AAAA/NS/MX records, map IPs to ASN and hosting provider, and pull passive DNS history to discover related infrastructure and pivots.[4][7][1]
+
+3. **Security Posture Checks:** Test for open zone transfers (AXFR), verify DNSSEC deployment, and parse SPF/DKIM/DMARC records to assess anti-spoofing controls.[3][14][1]
+
+4. **Ownership & Lifecycle:** Query RDAP for registrar, status codes, nameservers, and expiration dates to track lock status and renewal risk as RDAP replaces WHOIS for gTLDs.[6][15]
+
+5. **Threat Intelligence & Classification:** Cross-reference domains against tracker lists (Disconnect, EasyList) and passive DNS feeds to label advertising, analytics, and known-bad infrastructure.[2][16]
+
+6. **Lookalike Detection:** Generate and flag IDN homographs and typosquatting variants using Punycode normalization and edit-distance algorithms to surface brand impersonation risks.[17][18]
+
+7. **Prioritization & Reporting:** Score domains by missing controls (no DMARC reject, no DNSSEC, open AXFR), aggregate by eTLD+1 and ASN, and output CSV or JSON for dashboards and remediation tracking.[14][1][3]
+
+***
+
+## Implementation: Key Components
+
+### 1. Normalization with Public Suffix List
+
+The Public Suffix List defines where organizations can register domains, handling edge cases like `.co.uk` and `.com.au` that naive splitting would misparse. Use the `publicsuffix` Go package:[19][8]
+
+```go
+import "golang.org/x/net/publicsuffix"
+
+func normalizeAndExtract(fqdn string) (punycode, etldPlusOne string, err error) {
+    fqdn = strings.ToLower(strings.TrimSuffix(fqdn, "."))
+    punycode, err = idna.ToASCII(fqdn)
+    if err != nil {
+        return "", "", err
+    }
+    etldPlusOne, err = publicsuffix.EffectiveTLDPlusOne(punycode)
+    return punycode, etldPlusOne, err
+}
+```
+
+This converts Unicode domains to Punycode (preventing IDN homograph attacks from slipping through deduplication) and correctly extracts the registered domain for ownership grouping.[13][17]
+
+### 2. Concurrent DNS Resolution
+
+Resolve A/AAAA/NS/MX records for every domain in parallel using a worker pool:
+
+```go
+func resolveDNS(domains []string) []DNSResult {
+    results := make(chan DNSResult, len(domains))
+    var wg sync.WaitGroup
+    sem := make(chan struct{}, 100) // limit concurrency
+    
+    for _, domain := range domains {
+        wg.Add(1)
+        go func(d string) {
+            defer wg.Done()
+            sem <- struct{}{}
+            defer func() { <-sem }()
+            
+            ips, _ := net.LookupIP(d)
+            mx, _ := net.LookupMX(d)
+            ns, _ := net.LookupNS(d)
+            results <- DNSResult{Domain: d, IPs: ips, MX: mx, NS: ns}
+        }(domain)
+    }
+    
+    go func() {
+        wg.Wait()
+        close(results)
+    }()
+    
+    var out []DNSResult
+    for r := range results {
+        out = append(out, r)
+    }
+    return out
+}
+```
+
+Go's goroutines and channels make this trivial to parallelize while respecting rate limits via a semaphore.[10]
+
+### 3. AXFR Zone Transfer Testing
+
+Open AXFR is a high-severity misconfiguration that leaks complete zone files. Test each authoritative nameserver:[20][3]
+
+```go
+import "github.com/miekg/dns"
+
+func testAXFR(domain, nameserver string) (bool, error) {
+    m := new(dns.Msg)
+    m.SetAxfr(domain)
+    
+    t := new(dns.Transfer)
+    c, err := t.In(m, nameserver+":53")
+    if err != nil {
+        return false, err
+    }
+    
+    for envelope := range c {
+        if envelope.Error != nil {
+            return false, envelope.Error
+        }
+        return true, nil // transfer succeeded
+    }
+    return false, nil
+}
+```
+
+Flag any domain where AXFR succeeds from an unauthorized source for immediate remediation.[21][3]
+
+### 4. DMARC and DNSSEC Checks
+
+Parse DMARC policy from `_dmarc.<domain>` TXT records and check for DNSSEC via DS records:
+
+```go
+func checkDMARC(domain string) (policy string, err error) {
+    txts, err := net.LookupTXT("_dmarc." + domain)
+    if err != nil {
+        return "none", err
+    }
+    for _, txt := range txts {
+        if strings.HasPrefix(txt, "v=DMARC1") {
+            // parse p= tag
+            if strings.Contains(txt, "p=reject") {
+                return "reject", nil
+            } else if strings.Contains(txt, "p=quarantine") {
+                return "quarantine", nil
+            }
+            return "none", nil
+        }
+    }
+    return "none", nil
+}
+
+func checkDNSSEC(domain string) bool {
+    _, err := net.LookupNS(domain)
+    // Use dns.Client with DNSSEC validation
+    // Simplified: check for DS records at parent zone
+    return err == nil // placeholder
+}
+```
+
+Domains without DMARC reject or DNSSEC are scored higher risk for spoofing and cache poisoning.[1][14]
+
+### 5. IP to ASN Mapping
+
+Map resolved IPs to BGP ASN using Team Cymru's IP→ASN service or a local GeoIP database :[7][22]
+
+```go
+func ipToASN(ip string) (asn int, org string, err error) {
+    // Query Team Cymru DNS: <reversed-ip>.origin.asn.cymru.com
+    // Parse TXT response for ASN | BGP Prefix | CC | Registry | Allocated
+    // Simplified example
+    return 15169, "Google LLC", nil
+}
+```
+
+Clustering domains by ASN reveals hosting concentration and shared infrastructure for pivot analysis.[7]
+
+### 6. RDAP Queries
+
+RDAP is replacing WHOIS for domain ownership and lifecycle data :[15][6]
+
+```go
+import "github.com/openrdap/rdap"
+
+func queryRDAP(domain string) (*rdap.Domain, error) {
+    client := &rdap.Client{}
+    return client.QueryDomain(domain)
+}
+```
+
+Extract registrar, creation/expiration dates, EPP status codes (clientTransferProhibited, serverHold), and nameservers for governance and renewal risk tracking.[23][6]
+
+### 7. Tracker List Classification
+
+Cross-reference domains against the Disconnect tracking protection lists to label advertising, analytics, and social widgets :[2]
+
+```go
+func classifyTracker(domain string, trackerDB map[string]string) string {
+    if category, ok := trackerDB[domain]; ok {
+        return category // "Advertising", "Analytics", "Social"
+    }
+    return "Unknown"
+}
+```
+
+These lists power Firefox Enhanced Tracking Protection and provide a privacy risk signal for third-party domains.[24][2]
+
+### 8. IDN Homograph Detection
+
+Generate confusable variants using Unicode normalization and edit distance to flag potential phishing domains :[18][17]
+
+```go
+func detectHomographs(domain string, knownDomains []string) []string {
+    var matches []string
+    normalized := idna.ToUnicode(domain)
+    for _, known := range knownDomains {
+        if levenshtein(normalized, idna.ToUnicode(known)) <= 2 {
+            matches = append(matches, known)
+        }
+    }
+    return matches
+}
+```
+
+Punycode normalization ensures Unicode lookalikes are caught before visual inspection.[25][17]
+
+***
+
+## Scoring and Prioritization
+
+Assign risk scores based on missing controls and known-bad signals:
+
+```go
+func scoreDomain(result AnalysisResult) int {
+    score := 0
+    if result.DMARC != "reject" {
+        score += 20
+    }
+    if !result.DNSSEC {
+        score += 15
+    }
+    if result.OpenAXFR {
+        score += 50 // critical
+    }
+    if result.TrackerCategory == "Advertising" {
+        score += 10
+    }
+    return score
+}
+```
+
+Aggregate scores by eTLD+1 and ASN to identify systemic gaps and concentration risk.[8][7]
+
+***
+
+## Output and Reporting
+
+Write results to CSV or JSON for ingestion by SIEMs, dashboards, or ticketing systems:
+
+```go
+func writeCsv(results []AnalysisResult, path string) error {
+    f, _ := os.Create(path)
+    defer f.Close()
+    w := csv.NewWriter(f)
+    w.Write([]string{"Domain", "eTLD+1", "DMARC", "DNSSEC", "OpenAXFR", "ASN", "TrackerCategory", "RiskScore"})
+    for _, r := range results {
+        w.Write([]string{r.Domain, r.ETLD1, r.DMARC, fmt.Sprint(r.DNSSEC), fmt.Sprint(r.OpenAXFR), fmt.Sprint(r.ASN), r.TrackerCategory, fmt.Sprint(r.Score)})
+    }
+    w.Flush()
+    return w.Error()
+}
+```
+
+Roll up metrics by eTLD+1, provider, and policy state to track remediation progress over time.[7][8]
+
+---
+
+## Performance and Scale
+
+**Concurrency tuning:** Limit goroutines with a semaphore (e.g., 100–500 workers) to avoid overwhelming DNS resolvers or hitting API rate limits.[10]
+
+**Caching:** Cache PSL, tracker lists, and ASN databases in memory to avoid repeated fetches and speed up classification.[2][8][7]
+
+**Batch processing:** Split large domain lists into chunks and process incrementally, checkpointing progress to recover from failures.[10]
+
+**External services:** Use passive DNS APIs, CT log APIs, and RDAP bootstrap services for discovery and enrichment; respect rate limits and authentication.[5][4][6]
+
+Testing with 2,255 domains (your Ghostery extension example) should complete in under 5 minutes on a modern machine with proper concurrency tuning.[10]
+
+---
+
+## Security Considerations
+
+**Input validation:** Sanitize domain names to prevent injection attacks in DNS queries or shell commands if calling external tools.[11][10]
+
+**TLS verification:** Always verify certificates when querying HTTPS APIs to avoid MITM attacks on enrichment data.[26][10]
+
+**Sensitive data:** RDAP and WHOIS may contain PII; handle registrant data according to GDPR and retention policies.[6][23]
+
+**Rate limiting:** Respect DNS server and API rate limits to avoid blacklisting and ensure ethical reconnaissance.[16][4]
+
+***
+
+## Next Steps
+
+**Passive DNS integration:** Add feeds from SecurityTrails, Farsight, or VirusTotal for historical resolution data and co-hosted domain discovery.[27][4][16]
+
+**Certificate Transparency monitoring:** Poll CT logs for newly issued certificates to discover shadow infrastructure and subdomain sprawl.[28][5]
+
+**Threat feed enrichment:** Cross-reference domains against abuse.ch, PhishTank, and commercial threat intelligence for known-bad labeling.[16]
+
+**Dashboard and alerting:** Stream results to Elasticsearch, Splunk, or Grafana for real-time posture tracking and anomaly detection.[29][30]
+
+**CI/CD integration:** Run the scanner nightly against your asset inventory and alert on new high-risk findings or policy violations.[11][10]
+
+***
+
