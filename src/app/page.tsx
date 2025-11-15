@@ -119,7 +119,7 @@ export default function HomePage() {
                 <span>nilay.sharan</span>
               </UnstyledLink>
               <UnstyledLink
-                href="https://github.com/substantialcattle5"
+                href="https://github.com/s4tvara"
                 className={clsx(
                   "inline-flex items-center gap-1 text-sm font-medium md:text-base",
                   "text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white",
@@ -128,7 +128,7 @@ export default function HomePage() {
                 )}
               >
                 <SiGithub className="shrink-0" />
-                <span>SubstantialCattle5</span>
+                <span>s4tvara</span>
               </UnstyledLink>
             </div>
           </article>

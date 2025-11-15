@@ -52,7 +52,7 @@ const featuredProjects: Array<ProjectFrontmatter> = [
     description: "A GitHub Actions designed to help maintainers manage low-effort pull requests events like Hacktoberfest.",
     techs: 'git,javascript,nodejs,automation',
     banner: "nilaysharan/project/octoguard/bb3",
-    github: "github.com/substantialcattle5/octoguard"
+    github: "github.com/s4tvara/octoguard"
   },
   
 ];
@@ -65,7 +65,7 @@ export const allProjects: Array<ProjectFrontmatter> = [
     description: "A GitHub Actions designed to help maintainers manage low-effort pull requests events like Hacktoberfest.",
     techs: 'git,javascript,nodejs,automation',
     banner: "nilaysharan/project/octoguard/bb3",
-    github: "github.com/substantialcattle5/octoguard"
+    github: "github.com/s4tvara/octoguard"
   },
   {
     slug: "sietch",

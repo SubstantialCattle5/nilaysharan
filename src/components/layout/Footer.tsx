@@ -66,7 +66,7 @@ export const SocialLinks = () => {
 const footerLinks: { href: string; text: string; tooltip: React.ReactNode }[] =
   [
     {
-      href: "https://github.com/substantialcattle5/nilaysharan",
+      href: "https://github.com/s4tvara/nilaysharan",
       text: "Source Code",
       tooltip: (
         <>
@@ -100,7 +100,7 @@ type Social = {
 };
 const socials: Social[] = [
   {
-    href: "https://github.com/substantialcattle5/",
+    href: "https://github.com/s4tvara/",
     icon: SiGithub,
     id: "Github",
     text: (

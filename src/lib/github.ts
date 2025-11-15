@@ -3,7 +3,7 @@ import readingTime from 'reading-time';
 import { githubToken } from '@/constant/env';
 
 const GITHUB_API_URL = 'https://api.github.com';
-const REPO_OWNER = 'SubstantialCattle5';
+const REPO_OWNER = 's4tvara';
 const REPO_NAME = '0xFlagged';
 
 interface GitHubFile {
